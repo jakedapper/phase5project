@@ -5,7 +5,6 @@ GEM
       actionpack (= 7.0.4)
       activesupport (= 7.0.4)
       nio4r (~> 2.0)
-      websocket-driver (>= 0.6.1)
     actionmailbox (7.0.4)
       actionpack (= 7.0.4)
       activejob (= 7.0.4)
@@ -155,9 +154,6 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    websocket-driver (0.7.5)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.5)
     zeitwerk (2.6.1)
 
 PLATFORMS
