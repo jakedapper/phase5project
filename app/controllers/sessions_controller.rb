@@ -1,14 +1,13 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize
+    skip_before_action :authorize, only: [:create]
 
     def create
         user = User.find_by(username: params[:username])
-        
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
             render json: user
         else
-            render json: { error: ["Invalid username or password"] }, status: :unauthorized
+            render json: { error: ["Invalid password or Username"]}, status: :unauthorized
         end
     end
 
@@ -18,14 +17,4 @@ class SessionsController < ApplicationController
     end
 
 
-    # private
-
-    # def self.authenticate(username, password)
-    #     user = find_by_email(username)
-    #     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-    #       user
-    #     else
-    #       nil
-    #     end
-    #   end
 end

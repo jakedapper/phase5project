@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :destroy]
-    # skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: :create
+    # before_action :set_user, only: [:show, :destroy]
 
     def create
       user = User.create!(user_params)
@@ -13,12 +13,13 @@ class UsersController < ApplicationController
     # end
 
     def show
-      render json: @user, status: 200
+      render json: @current_user, status: 200
     end
     
     def destroy
-      @user.destroy
-      render json: {"Success": "User Eliminated"}
+      user = User.find_by!(id: params[:id])
+      user.destroy!
+      head :no_content, status: :ok
     end
 
     private
@@ -31,10 +32,10 @@ class UsersController < ApplicationController
     #     render json: {error: error.message}, status: 422
     #   end
 
-    def set_user
-      binding.pry
-      @user = User.find(params[:id])
-    end
+    # def set_user
+    #   binding.pry
+    #   @user = User.find(params[:id])
+    # end
 
     def user_params
       params.permit(:name, :manager_band, :username, :password_digest, :password)

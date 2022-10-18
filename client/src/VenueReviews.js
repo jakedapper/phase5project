@@ -38,7 +38,7 @@ function VenueReviews({user, venues}) {
           <h3> hello venue reviews coming soon</h3>
           {venues.map((venue) => <VenueItem venue={venue}/>)}
           <button onClick={handleFormShowClick}>Leave A Review?</button>
-          {displayForm ? <VenueReviewForm venues={venues}/> : <div></div>}
+          {displayForm ? <VenueReviewForm user={user} venues={venues}/> : <div></div>}
       </div>
     )
 }

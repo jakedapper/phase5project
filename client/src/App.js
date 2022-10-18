@@ -10,15 +10,20 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [venues, setVenues] = useState([])
+  const [reviews, setReviews] = useState([])
   
-  // const [venues, setVenues] = useState(null)
-  
-  // useEffect(()=> {
-  //   fetch("/venues")
-  //   .then((res) => res.json())
-  //   .then((data) => setVenues(data))
-  // }, [])
-
+  useEffect(()=> {
+    setLoading(true);
+    fetch("/reviews")
+    .then((res) => res.json())
+    .then((data) => setReviews(data))
+    .catch((err) => {
+      setError(err)
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+  }, [user])
 
   useEffect(()=> {
     setLoading(true);
@@ -32,6 +37,8 @@ function App() {
       setLoading(false)
     })
   }, [user])
+  
+  
 
     // function handleFormShowClick(){
     //     console.log("click")
@@ -51,7 +58,7 @@ function App() {
 
   return (
     <div>
-      {/* <LogIn user={user} setUser={setUser}/> */}
+      <LogIn user={user} setUser={setUser}/>
       <Switch>
         <Route exact path="/">
           <Home/>

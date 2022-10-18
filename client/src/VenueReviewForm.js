@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-function VenueReviewForm ({venues}) {
+function VenueReviewForm ({venues, user}) {
     const [formGreenRoomRating, setFormGreenRoomRating] = useState("")
     const [formSoundEngRating, setFormSoundEngRating] = useState("")
     const [formMerchCut, setFormMerchCut] = useState("")
@@ -11,14 +11,22 @@ function VenueReviewForm ({venues}) {
     function handleSubmit(e) {
         e.preventDefault();
         
-        // fetch("/", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //   }),
-        // }).then((res) => res.json())
+        const newReview = {
+            greenroom_rating: formGreenRoomRating,
+            sound_engineer_rating: formSoundEngRating,
+            merch_cut: formMerchCut,
+            comments: formComments,
+            venue_id: selectedVenue,
+            user_id: user.id
+        }
+
+        fetch("/reviews", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({newReview}),
+        }).then((res) => res.json())
         
     }
 
@@ -35,7 +43,7 @@ function VenueReviewForm ({venues}) {
                     placeholder="Rating Out of 5"
                     type="text"
                     name="greenroom_rating"
-                    // onChange={(e)=>setGreenRating(e.target.value)}
+                    onChange={(e)=>setFormGreenRoomRating(e.target.value)}
                     value={formGreenRoomRating}
                 />
                  <label>Sound Engineer Rating</label>
@@ -43,23 +51,23 @@ function VenueReviewForm ({venues}) {
                     placeholder="Rating Out of 5"
                     type="text"
                     name="sound_engineer_rating"
-                    // onChange={(e)=>setForm(e.target.value)}
+                    onChange={(e)=>setFormSoundEngRating(e.target.value)}
                     value={formSoundEngRating}
                 />
-                 <label></label>
+                 <label>Merch Cut %</label>
                 <input
-                    placeholder=""
+                    placeholder="%?"
                     type="text"
-                    name=""
-                    // onChange={(e)=>setForm(e.target.value)}
+                    name="merch_cut"
+                    onChange={(e)=>setFormMerchCut(e.target.value)}
                     value={formMerchCut}
                 />
-                 <label></label>
+                 <label>Additional Comments</label>
                 <input
-                    placeholder=""
+                    placeholder="What's On Your Mind?"
                     type="text"
-                    name=""
-                    // onChange={(e)=>setForm(e.target.value)}
+                    name="comments"
+                    onChange={(e)=>setFormComments(e.target.value)}
                     value={formComments}
                 />
                 <input type="submit"/>
