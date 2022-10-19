@@ -17,6 +17,7 @@ function NewShowForm ({user, setUser, tours, cities}) {
     const [newShowDate, onChange] = useState(new Date());
 
     console.log(newShowDate)
+    
     function handleSubmit(e) {
         e.preventDefault();
         
@@ -50,7 +51,7 @@ function NewShowForm ({user, setUser, tours, cities}) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              date: newShowDate,
+              date: newShowDate.toLocaleDateString(),
               doors_time: formShowDoors,
               soundcheck_time: formShowSoundcheck,
               set_time: formShowSetTime,
@@ -63,7 +64,7 @@ function NewShowForm ({user, setUser, tours, cities}) {
     }
 
 
-    console.log(newShowDate.toLocaleDateString())
+    
 
     return(
         <div>

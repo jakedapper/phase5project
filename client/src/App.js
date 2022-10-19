@@ -63,6 +63,13 @@ function App() {
     })
   }, [reviews])
 
+
+  // let venueAddresses = []
+
+  // venues.map((venue) => venueAddresses.push(venue.address))
+
+  // console.log(venueAddresses)
+
   useEffect(()=> {
     setLoading(true);
     fetch(`/tours/1`)
@@ -136,7 +143,7 @@ function App() {
           <UsersTour tours={tours}/>
         </Route>
         <Route path="/map">
-            <MapContainer/>
+            <MapContainer venues={venues}/>
         </Route>
       </Switch>
     </div>
