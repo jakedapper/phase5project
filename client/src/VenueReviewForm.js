@@ -1,38 +1,51 @@
 import { React, useState, useEffect } from "react";
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-function VenueReviewForm ({venues, user}) {
+function VenueReviewForm ({venues, user, addNewReview}) {
     const [formGreenRoomRating, setFormGreenRoomRating] = useState("")
     const [formSoundEngRating, setFormSoundEngRating] = useState("")
     const [formMerchCut, setFormMerchCut] = useState("")
     const [formComments, setFormComments] = useState("")
-    const [selectedVenue, setSelectedVenue] = useState("")
+    const [selectedVenue, setSelectedVenue] = useState(1)
 
     function handleSubmit(e) {
         e.preventDefault();
         
-        const newReview = {
-            greenroom_rating: formGreenRoomRating,
-            sound_engineer_rating: formSoundEngRating,
-            merch_cut: formMerchCut,
-            comments: formComments,
-            venue_id: selectedVenue,
-            user_id: user.id
-        }
+        console.log(selectedVenue)
+        console.log(user.id)
+
+        // const newReview = {
+        //     greenroom_rating: formGreenRoomRating,
+        //     sound_engineer_rating: formSoundEngRating,
+        //     merch_cut: formMerchCut,
+        //     comments: formComments,
+        //     venue_id: selectedVenue,
+        //     user_id: user.id
+        // }
 
         fetch("/reviews", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({newReview}),
-        }).then((res) => res.json())
+          body: JSON.stringify(
+            {
+            greenroom_rating: formGreenRoomRating,
+            sound_engineer_rating: formSoundEngRating,
+            merch_cut: formMerchCut,
+            comments: formComments,
+            venue_id: selectedVenue,
+            user_id: user.id
+            }
+          ),
+        })
+        .then((res) => res.json())
+        .then((newReview) => addNewReview(newReview))
         
     }
 
     return (
         <div>
-            <h3> Hi I'm gonna be a cool form eventually</h3>
             <p>Leave a Review</p>
             <select value={selectedVenue} onChange={(e)=>setSelectedVenue(e.target.value)}>
                 {venues.map((venue)=> <option key={venue.id} value={venue.id}>{venue.name}</option>)}

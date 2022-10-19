@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import VenueReviewForm from "./VenueReviewForm"
 import VenueItem from "./VenueItem"
 
-function VenueReviews({user, venues}) {
+function VenueReviews({user, venues, addNewReview}) {
   const [displayForm, setDisplayForm] = useState(false)
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState();
@@ -38,7 +38,7 @@ function VenueReviews({user, venues}) {
           <h3> hello venue reviews coming soon</h3>
           {venues.map((venue) => <VenueItem venue={venue}/>)}
           <button onClick={handleFormShowClick}>Leave A Review?</button>
-          {displayForm ? <VenueReviewForm user={user} venues={venues}/> : <div></div>}
+          {displayForm ? <VenueReviewForm addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
       </div>
     )
 }

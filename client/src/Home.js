@@ -5,15 +5,25 @@ function Home({}) {
 
     let history = useHistory();
 
-    function handleClick(){
+    function handleReviewsClick(){
         history.push(("/venues"))
+    }
+
+    function handleShowsClick() {
+        history.push(("/addNewShow"))
+    }
+
+    function handleMyTourClick() {
+        history.push(("/myTour"))
     }
 
 
     return(
         <div>
             <h2>HOME PAGE</h2>
-            <button onClick={handleClick}>Venue Reviews</button>
+            <button onClick={handleReviewsClick}>Venue Reviews</button>
+            <button onClick={handleShowsClick}>Add Show To Tour</button>
+            <button onClick={handleMyTourClick}>My Tour</button>
         </div>
     )
 }

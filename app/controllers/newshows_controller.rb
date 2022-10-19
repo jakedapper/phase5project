@@ -1,0 +1,2 @@
+class NewshowsController < ApplicationController
+end

@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter} from "react-router-dom";
 import './index.css';
+import 'react-calendar/dist/Calendar.css';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
