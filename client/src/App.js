@@ -6,6 +6,7 @@ import LogIn from "./LogIn"
 import LogOut from "./LogOut"
 import NewShowForm from "./NewShowForm"
 import UsersTour from "./UsersTour"
+import MapContainer from "./MapContainer"
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -133,6 +134,9 @@ function App() {
         </Route>
         <Route path="/myTour">
           <UsersTour tours={tours}/>
+        </Route>
+        <Route path="/map">
+            <MapContainer/>
         </Route>
       </Switch>
     </div>

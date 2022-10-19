@@ -16,6 +16,7 @@ return(
                 <h4>Sound Engineer Rating: {review.sound_engineer_rating}/5</h4>
                 <h4>Green Room Rating: {review.merch_cut}</h4>
                 <h4>Additional Comments: {review.comments}</h4>
+                <h4>-------------------------------</h4>
             </div>
             )}
         </div> :
