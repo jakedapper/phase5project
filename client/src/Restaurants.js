@@ -13,22 +13,22 @@ Geocode.setApiKey("AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY");
         height: "100vh",
         width: "100%"};
 
-    if (selectedVenue) {    
+        
     let venue = venues.filter((venue)=> venue.name === selectedVenue)
-    let coords = venue[0].coordinates
-    }
+    // let coords = venue[0].coordinates
+    
 
     return(
         <div>
             <select value={selectedVenue} onChange={(e)=>setSelectedVenue(e.target.value)}>
                 {venues.map((venue)=> <option key={venue.id} value={venue.name}>{venue.name}</option>)}
             </select>
-            {/* {selectedVenue ? 
+            {/* {selectedVenue !== {} ? 
              <LoadScript
              googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
               <GoogleMap
                 mapContainerStyle={mapStyles}
-                zoom={5}
+                zoom={15}
                 center={coords}
               >
             </GoogleMap>

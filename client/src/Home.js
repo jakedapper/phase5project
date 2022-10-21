@@ -17,6 +17,10 @@ function Home({userVar}) {
         history.push(("/myTour"))
     }
 
+    function handleRestaurantsClick() {
+        history.push("/restaurants")
+    }
+
 
     return(
         <div>
@@ -25,6 +29,7 @@ function Home({userVar}) {
             <button onClick={handleReviewsClick}>Venue Reviews</button>
             <button onClick={handleShowsClick}>Add Show To Tour</button>
             <button onClick={handleMyTourClick}>My Tour</button>
+            <button onClick={handleRestaurantsClick}>Nearby Retaurants</button>
         </div>
     )
 }

@@ -39,14 +39,6 @@ function UserSignUp ({user, setUser}) {
                     onChange={(e)=>setFormName(e.target.value)}
                     value={formName}
                 />
-                <label>Role</label>
-                <input
-                    placeholder="Manager or Band?"
-                    type="text"
-                    name="role"
-                    onChange={(e)=>setFormRole(e.target.value)}
-                    value={formRole}
-                />
                 <label>Username</label>
                 <input
                     placeholder="Choose a username"

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import UserSignUp from "./UserSignUp"
 
 function LogIn({ user, setUser}) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [newUser, setNewUser]   = useState(false)
   const [errors, setErrors] = useState([])
 
 //   let history = useHistory();
@@ -22,10 +24,18 @@ function LogIn({ user, setUser}) {
         setUsername("")
         setPassword("")
     }
-   
+    function handleNewUserClick(){
+        if (newUser === false){
+            setNewUser(true)
+        }else {
+            setNewUser(false)
+      }
+    }
 
     return (
         <div>
+            <button onClick={handleNewUserClick}> New User? Need To Sign-Up?</button>
+            {newUser ? <UserSignUp/> : <></>}
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
 
@@ -49,6 +59,7 @@ function LogIn({ user, setUser}) {
 
                 <input type="submit"/>
             </form> 
+
         </div>
      )
 

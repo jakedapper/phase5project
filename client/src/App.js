@@ -121,9 +121,13 @@ function App() {
       setShows([...shows, newShow])
     }
 
+    let locallyStoredVenues = []
+    locallyStoredVenues = venues
     function updateVenues(newVenue){
       setVenues([...venues, newVenue])
+      // locallyStoredVenues.push(newVenue); 
     }
+  console.log(locallyStoredVenues)
     
     return (
       <div>
