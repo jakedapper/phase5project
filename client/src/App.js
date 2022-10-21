@@ -7,6 +7,7 @@ import LogOut from "./LogOut"
 import NewShowForm from "./NewShowForm"
 import UsersTour from "./UsersTour"
 import MapContainer from "./MapContainer"
+import Restaurants from "./Restaurants"
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -21,6 +22,7 @@ function App() {
   const [reviews, setReviews] = useState([])
   const [tours, setTours] = useState([])
   const [cities, setCities] = useState([])
+  const [shows, setShows] = useState([])
   
   let history = useHistory();
 
@@ -34,7 +36,7 @@ function App() {
       }
     });
   }, []);
-
+  let userVar = user
   useEffect(()=> {
     setLoading(true);
     fetch("/reviews")
@@ -48,7 +50,18 @@ function App() {
     })
   }, [user])
 
-
+  useEffect(()=> {
+    setLoading(true);
+    fetch("/shows")
+    .then((res) => res.json())
+    .then((data) => setShows(data))
+    .catch((err) => {
+      setError(err)
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+  }, [user])
 
   useEffect(()=> {
     setLoading(true);
@@ -61,18 +74,11 @@ function App() {
     .finally(() => {
       setLoading(false)
     })
-  }, [reviews])
-
-
-  // let venueAddresses = []
-
-  // venues.map((venue) => venueAddresses.push(venue.address))
-
-  // console.log(venueAddresses)
+  }, [user, reviews])
 
   useEffect(()=> {
     setLoading(true);
-    fetch(`/tours/1`)
+    fetch(`/tours/`)
     .then((res) => res.json())
     .then((data) => setTours(data))
     .catch((err) => {
@@ -81,10 +87,8 @@ function App() {
     .finally(() => {
       setLoading(false)
     })
-  }, [])
-
-  console.log(tours)
-
+  }, [user, shows])
+  
   useEffect(()=> {
     setLoading(true);
     fetch("/cities")
@@ -109,21 +113,17 @@ function App() {
       history.push("/")  
     };
 
-    // function handleFormShowClick(){
-    //     console.log("click")
-    //     if (displayForm === false){
-    //         setDisplayForm(true)
-    //     }else {
-    //         setDisplayForm(false)
-    //     }
-    // }
-    // if (loading) {
-    //   return <p>Data is loading...</p>;
-    // }
-  
-    // if (error || !Array.isArray(venues)) {
-    //   return <p>There was an error loading your data!</p>;
-    // }
+    function updateCities(newCity){
+      setCities([...cities, newCity])
+    }
+
+    function updateShows(newShow){
+      setShows([...shows, newShow])
+    }
+
+    function updateVenues(newVenue){
+      setVenues([...venues, newVenue])
+    }
     
     return (
       <div>
@@ -131,19 +131,22 @@ function App() {
       {!user ? <LogIn user={user} setUser={setUser}/> : <LogOut handleLogOut={handleLogOut}/>}
       <Switch>
         <Route exact path="/">
-          <Home/>
+          <Home userVar={userVar}/>
         </Route>
         <Route path="/venues">
           <VenueReviews addNewReview={addNewReview} user={user} venues={venues}/>
         </Route>
         <Route path="/addNewShow">
-            <NewShowForm cities={cities} tours={tours}/>
+            <NewShowForm updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
         </Route>
         <Route path="/myTour">
-          <UsersTour tours={tours}/>
+          <UsersTour venues={venues} user={user} tours={tours}/>
         </Route>
         <Route path="/map">
-            <MapContainer venues={venues}/>
+          <MapContainer user={user} venues={venues}/>
+        </Route>
+        <Route path="/restaurants">
+          <Restaurants venues={venues}/>
         </Route>
       </Switch>
     </div>

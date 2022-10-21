@@ -1,7 +1,8 @@
 import React, { useState}  from 'react';
 import Calendar from 'react-calendar';
+import Geocode from "react-geocode";
 
-function NewShowForm ({user, setUser, tours, cities}) {
+function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
     const [formVenueName, setFormVenueName] = useState("")
     const [formVenueAddress, setFormVenueAddress] = useState("")
     const [formCityName, setFormCityName] = useState("")
@@ -15,13 +16,19 @@ function NewShowForm ({user, setUser, tours, cities}) {
     const [newVenue, setNewVenue] = useState("")
     const [newShow, setNewShow] = useState("")
     const [newShowDate, onChange] = useState(new Date());
+    const [venueCoordinates, setVenueCoordinates] = useState({})
 
     console.log(newShowDate)
-    
-    function handleSubmit(e) {
+    console.log(user.id)
+
+    Geocode.setApiKey("AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY");
+
+
+
+     async function handleSubmit(e){
         e.preventDefault();
         
-        fetch("/cities", {
+        const res = await fetch("/cities", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -29,42 +36,54 @@ function NewShowForm ({user, setUser, tours, cities}) {
           body: JSON.stringify({
             name: formCityName
           }),
-        }).then((res) => res.json())
-        .then((city)=>setNewCity(city))
+        })
+        const cityy = await res.json()
+        updateCities(cityy)
 
-        fetch("/venues", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: formVenueName,
-              address: formVenueAddress,
-              city_id: newCity.id
-            }),
-          }).then((res) => res.json())
-          .then((venue)=>setNewVenue(venue))
+        const res1 = await Geocode.fromAddress(formVenueAddress)
+        const coords = res1.results[0].geometry.location
+        console.log(coords)
 
-        fetch("/shows", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              date: newShowDate.toLocaleDateString(),
-              doors_time: formShowDoors,
-              soundcheck_time: formShowSoundcheck,
-              set_time: formShowSetTime,
-              city_id: newCity.id,
-              tour_id: user.tour.id,
-              venue_id: newVenue.id
-            }),
-          }).then((res) => res.json())
-          .then((show)=>setNewShow(show))  
+        async function venuePost(city, coords){
+         const res = await fetch("/venues", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formVenueName,
+            address: formVenueAddress,
+            city_id: city.id,
+            lat: coords.lat,
+            lng: coords.lng
+          }),
+        })
+          const addedVenue = await res.json()
+          updateVenues(addedVenue)
+          function postShows(addedVenue, city) {
+            console.log(user)
+            fetch("/shows", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                date: newShowDate.toLocaleDateString(),
+                doors_time: formShowDoors,
+                soundcheck_time: formShowSoundcheck,
+                set_time: formShowSetTime,
+                city_id: city.id,
+                tour_id: user.tours[0].id,
+                venue_id: addedVenue.id,
+                user_id: user.id
+              }),
+            }).then((res) => res.json())
+            .then((newShow)=>updateShows)
+          }
+          postShows(addedVenue, city)
+        }
+        venuePost(cityy, coords)
     }
-
-
-    
 
     return(
         <div>

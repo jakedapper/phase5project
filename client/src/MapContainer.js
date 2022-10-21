@@ -1,16 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Geocode from "react-geocode";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-function MapContainer({venues}){
-  const [mapData, setMapData] = useState({})
+function MapContainer({user, venues}){
+  // const [venueCoordinates, setVenueCoordinates] = useState({})
+  const [coordinateArray, setCoordinateArray] = useState([])
   
-  let venueAddresses = []
-
-  venues.map((venue) => venueAddresses.push(venue.address))
-
-  console.log(venueAddresses)
-
+  Geocode.setApiKey("AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY");
+  
   
 
   const mapStyles = {        
@@ -21,26 +18,24 @@ function MapContainer({venues}){
       lat: 39.8283, lng: -98.5795
     }
 
-      
-    Geocode.setApiKey("AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY");
-    
-  // let mapData = {}
    
-  // venueAddresses.map((address) => 
-  //   useEffect(()=>{
-
-  //     Geocode.fromAddress(address).then(
-  //         (response) => {
-  //             let { lat, lng } = response.results[0].geometry.location;
-  //             setMapData({lat, lng});
-  //             console.log(mapData)
-  //         },
-  //         (error) => {
-  //             console.error(error);
-  //     })
-  //   }, [])
-
   
+  // useEffect(()=>{
+  //   Geocode.fromAddress("1354 W Wabansia Ave, Chicago, IL 60642").then(
+  //       (response) => {
+  //           let { lat, lng } = response.results[0].geometry.location;
+  //           setVenueCoordinates({lat, lng});
+  //           console.log("inside geocode:", venueCoordinates)
+  //           let mapDataClone  = venueCoordinates
+  //           console.log(mapDataClone)
+  //           coordinateArray.push(venueCoordinates)
+  //           console.log("coordinate array:",coordinateArray)
+  //       },
+  //       (error) => {
+  //           console.error(error);
+  //   })
+  // }, [user])
+  // console.log(venueCoordinates) 
 
   return (
      <LoadScript
@@ -49,7 +44,11 @@ function MapContainer({venues}){
           mapContainerStyle={mapStyles}
           zoom={5}
           center={defaultCenter}
-        />
+        >
+          {user && user.shows.map((show)=> 
+            <Marker key={show.id} position={show.venue_coordinates}/>
+          )}
+      </GoogleMap>
      </LoadScript>
   )
 }

@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
+import MapContainer from "./MapContainer"
 
-function UsersTour({user, tours}) {
+function UsersTour({user, venues, tours}) {
 
-    let shows = tours.shows
-    let cities = tours.cities
-    console.log(shows)
-    console.log(shows.city_name)
+    console.log(user.shows)
+    let shows = user.shows
+    // let cities = tours.cities
+    // console.log(shows)
+    // console.log(shows.city_name)
 
     return (
         <div>
+            <MapContainer user={user} venues={venues}/>
             {shows.map((show) => 
             <div>
                 <h3>{show.city_name}</h3>
