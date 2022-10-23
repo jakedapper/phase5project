@@ -8,6 +8,7 @@ import NewShowForm from "./NewShowForm"
 import UsersTour from "./UsersTour"
 import MapContainer from "./MapContainer"
 import Restaurants from "./Restaurants"
+import MaterialUi from "./MaterialUi";
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -28,15 +29,23 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
+    setLoading(true);
+    fetch("/me")
+    .then((r) => {
       if (r.ok) {
-        r.json().then((user) => {
+        r.json()
+        .then((user) => {
           setUser(user)
         });
       }
-    });
-  }, []);
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+    }, []);
+
   let userVar = user
+  // console.log(user.shows)
   useEffect(()=> {
     setLoading(true);
     fetch("/reviews")
@@ -100,7 +109,7 @@ function App() {
     .finally(() => {
       setLoading(false)
     })
-  }, [])
+  }, [user])
  
   function addNewReview(newReview){
     setReviews(...reviews, newReview)
@@ -121,27 +130,33 @@ function App() {
       setShows([...shows, newShow])
     }
 
+    function updateTours(newTour){
+      setTours([...tours, newTour])
+    }
+
     let locallyStoredVenues = []
     locallyStoredVenues = venues
     function updateVenues(newVenue){
       setVenues([...venues, newVenue])
-      // locallyStoredVenues.push(newVenue); 
+      locallyStoredVenues.push(newVenue); 
     }
-  console.log(locallyStoredVenues)
+  // console.log(locallyStoredVenues)
+    
+  if (user === null) return <LogIn updateTours={updateTours} user={user} setUser={setUser}/> 
     
     return (
       <div>
       {/* <LogIn user={user} setUser={setUser}/> */}
-      {!user ? <LogIn user={user} setUser={setUser}/> : <LogOut handleLogOut={handleLogOut}/>}
+      <LogOut handleLogOut={handleLogOut}/>
       <Switch>
         <Route exact path="/">
-          <Home userVar={userVar}/>
+          <Home user={user}/>
         </Route>
         <Route path="/venues">
           <VenueReviews addNewReview={addNewReview} user={user} venues={venues}/>
         </Route>
         <Route path="/addNewShow">
-            <NewShowForm updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
+            <NewShowForm  updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
         </Route>
         <Route path="/myTour">
           <UsersTour venues={venues} user={user} tours={tours}/>
@@ -150,8 +165,9 @@ function App() {
           <MapContainer user={user} venues={venues}/>
         </Route>
         <Route path="/restaurants">
-          <Restaurants venues={venues}/>
+          <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
         </Route>
+
       </Switch>
     </div>
   )

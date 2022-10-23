@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import MapContainer from "./MapContainer"
+import CircularProgress from "@mui/material/CircularProgress"
 
 function UsersTour({user, venues, tours}) {
-
+    if (user === null){
+        return(<CircularProgress />)
+    }
     console.log(user.shows)
     let shows = user.shows
     // let cities = tours.cities

@@ -1,17 +1,16 @@
 import React, { useState}  from 'react';
 
-function UserSignUp ({user, setUser}) {
+function UserSignUp ({updateTours,user, setUser}) {
     const [formName, setFormName] = useState("")
-    const [formRole, setFormRole] = useState("")
     const [formUsername, setFormUsername] = useState("")
     const [formPassword, setFormPassword] = useState("")
     
     // const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-    function handleSubmit(e) {
+   async function handleSubmit(e) {
         e.preventDefault();
         
-        fetch("/signup", {
+       const res = await fetch("/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -21,10 +20,22 @@ function UserSignUp ({user, setUser}) {
             password: formPassword,
             // password_confirmation: passwordConfirmation,
             name: formName,
-            role: formRole
           }),
-        }).then((res) => res.json())
-        .then((data) => setUser(data))
+        })
+        const me = await res.json()
+        
+        fetch("/tours", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: me.id
+            }),
+          }).then((res) => res.json())
+          .then((newTour) => updateTours(newTour))
+
+        
     }
 
     return(

@@ -8,9 +8,9 @@ class UsersController < ApplicationController
       render json: user, status: :created
     end
   
-    # def index 
-    #   render json: User.all, status: :ok
-    # end
+    def index 
+      render json: User.all, status: :ok
+    end
 
     def show
       render json: @current_user, status: 200
@@ -23,7 +23,11 @@ class UsersController < ApplicationController
     end
 
     private
- 
+    
+    def user_params
+      params.permit(:name, :username, :password)
+    end
+
     # def not_found
     #     render json: {"error": "User not found"}, status: :not_found
     #   end
@@ -36,9 +40,5 @@ class UsersController < ApplicationController
     #   binding.pry
     #   @user = User.find(params[:id])
     # end
-
-    def user_params
-      params.permit(:name, :manager_band, :username, :password_digest, :password)
-    end
 
 end

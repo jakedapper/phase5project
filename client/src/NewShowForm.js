@@ -1,6 +1,7 @@
 import React, { useState}  from 'react';
 import Calendar from 'react-calendar';
 import Geocode from "react-geocode";
+import CircularProgress from "@mui/material/CircularProgress"
 
 function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
     const [formVenueName, setFormVenueName] = useState("")
@@ -11,18 +12,32 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
     const [formShowSoundcheck, setFormShowSoundcheck] = useState("")
     const [formShowSetTime, setFormShowSetTime] = useState("")
     const [selectedTour, setSelectedTour] = useState(1)
-    const [selectedCity, setSelectedCity] = useState(1)
+    const [selectedCity, setSelectedCity] = useState("Chicago")
     const [newCity, setNewCity] =useState("")
     const [newVenue, setNewVenue] = useState("")
     const [newShow, setNewShow] = useState("")
     const [newShowDate, onChange] = useState(new Date());
     const [venueCoordinates, setVenueCoordinates] = useState({})
 
+
+    if (user === null){
+      return(<CircularProgress />)
+  }
+
+
     console.log(newShowDate)
     console.log(user.id)
 
     Geocode.setApiKey("AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY");
 
+      let newCityName = ""
+    
+      if (formCityName === ""){
+         newCityName = selectedCity
+      }else{
+         newCityName = formCityName
+      }
+    
 
 
      async function handleSubmit(e){
@@ -34,13 +49,14 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: formCityName
+            name: newCityName
           }),
         })
         const cityy = await res.json()
         updateCities(cityy)
 
         const res1 = await Geocode.fromAddress(formVenueAddress)
+        console.log(res1)
         const coords = res1.results[0].geometry.location
         console.log(coords)
 
@@ -78,24 +94,20 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                 user_id: user.id
               }),
             }).then((res) => res.json())
-            .then((newShow)=>updateShows)
+            .then((newShow)=>updateShows(newShow))
           }
           postShows(addedVenue, city)
         }
         venuePost(cityy, coords)
     }
-
+    
     return(
         <div>
             <p>Add A Show</p>
-            {/* <select value={selectedTour} onChange={(e)=>setSelectedTour(e.target.value)}>
-                {tours.map((tour)=> <option key={tour.id} value={tour.id}>{tour.user.name}</option>)}
+            {/* <select value={selectedCity} onChange={(e)=>setSelectedCity(e.target.value)}>
+                {cities.map((city)=> <option key={city.id} value={city.name}>{city.name}</option>)}
             </select> */}
-            <select value={selectedCity} onChange={(e)=>setSelectedTour(e.target.value)}>
-                {cities.map((city)=> <option key={city.id} value={city.id}>{city.name}</option>)}
-            </select>
-            <Calendar onChange={onChange} value={newShowDate}
-            />
+            <Calendar onChange={onChange} value={newShowDate}/>
             <form onSubmit={handleSubmit}>
                 <label>New City?</label>
                <input

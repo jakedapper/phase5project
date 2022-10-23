@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :manager_band, :username, :password_digest
+  attributes :id, :name, :username, :password_digest
 
 
 # def cord

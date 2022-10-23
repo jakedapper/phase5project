@@ -1,6 +1,6 @@
-u1 = User.create(name: "ACDC", manager_band: "band", username: "acdc", password: "rocknroll")
-u2 = User.create(name: "Lizard Man", manager_band: "band", username: "lizardman", password: "1234")
-u3 = User.create(name: "Jason", manager_band: "manager", username: "managerjason", password: "1234")
+u1 = User.create(name: "ACDC", username: "acdc", password: "rocknroll")
+u2 = User.create(name: "Lizard Man", username: "lizardman", password: "1234")
+u3 = User.create(name: "Jason", username: "managerjason", password: "1234")
 
 t1 = Tour.create(user_id: u1.id)
 t2 = Tour.create(user_id: u2.id)
@@ -32,8 +32,8 @@ s7 = Show.create(date: "4/6/2023", doors_time:"9pm", soundcheck_time: "6pm", set
 s8 = Show.create(date: "4/10/2023", doors_time:"8pm", soundcheck_time: "6pm", set_time:"10pm", city_id: c7.id, tour_id:t2.id, venue_id:v7.id, user_id: 2)
 
 
-r1 = Review.create(greenroom_rating:1, sound_engineer_rating:4, merch_cut:"15%", comments:"really cool room - sounnds way different with people inside of it", venue_id: v2.id, user_id:u1.id)
-r2 = Review.create(greenroom_rating:5, sound_engineer_rating:4, merch_cut:"15%", comments:"really cool room - sounnds way different with people inside of it", venue_id: v1.id, user_id:u1.id)
-r3 = Review.create(greenroom_rating:3, sound_engineer_rating:2, merch_cut:"15%", comments:"really cool room - sounnds way different with people inside of it", venue_id: v5.id, user_id:u2.id)
-r4 = Review.create(greenroom_rating:2, sound_engineer_rating:5, merch_cut:"15%", comments:"really cool room - sounnds way different with people inside of it", venue_id: v6.id, user_id:u2.id)
+r1 = Review.create(greenroom_rating:1, sound_engineer_rating:4, merch_cut:"15", comments:"really cool room - sounnds way different with people inside of it", venue_id: v2.id, user_id:u1.id)
+r2 = Review.create(greenroom_rating:5, sound_engineer_rating:4, merch_cut:"15", comments:"really cool room - sounnds way different with people inside of it", venue_id: v1.id, user_id:u1.id)
+r3 = Review.create(greenroom_rating:3, sound_engineer_rating:2, merch_cut:"15", comments:"really cool room - sounnds way different with people inside of it", venue_id: v5.id, user_id:u2.id)
+r4 = Review.create(greenroom_rating:2, sound_engineer_rating:5, merch_cut:"15", comments:"really cool room - sounnds way different with people inside of it", venue_id: v6.id, user_id:u2.id)
 

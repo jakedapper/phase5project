@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import VenueReviewForm from "./VenueReviewForm"
 import VenueItem from "./VenueItem"
+import CircularProgress from "@mui/material/CircularProgress"
 
 function VenueReviews({user, venues, addNewReview}) {
   const [displayForm, setDisplayForm] = useState(false)
@@ -24,7 +25,11 @@ function VenueReviews({user, venues, addNewReview}) {
 
 
     function handleFormShowClick(){
-        console.log("click")
+       
+      if (user === null || venues === []){
+        return(<CircularProgress />)
+      }
+
         if (displayForm === false){
             setDisplayForm(true)
         }else {

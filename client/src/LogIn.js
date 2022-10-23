@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserSignUp from "./UserSignUp"
 
-function LogIn({ user, setUser}) {
+function LogIn({ updateTours, user, setUser}) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [newUser, setNewUser]   = useState(false)
@@ -24,6 +24,7 @@ function LogIn({ user, setUser}) {
         setUsername("")
         setPassword("")
     }
+   
     function handleNewUserClick(){
         if (newUser === false){
             setNewUser(true)
@@ -35,7 +36,7 @@ function LogIn({ user, setUser}) {
     return (
         <div>
             <button onClick={handleNewUserClick}> New User? Need To Sign-Up?</button>
-            {newUser ? <UserSignUp/> : <></>}
+            {newUser ? <UserSignUp updateTours={updateTours} user={user} setUser={setUser}/> : <></>}
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
 
