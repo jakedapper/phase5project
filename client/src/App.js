@@ -12,6 +12,7 @@ import Restaurants from "./Restaurants"
 import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
 import './App.css'
+import background from './images/background.jpg'
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -157,7 +158,7 @@ function App() {
   if (user === null) return <LogIn updateTours={updateTours} user={user} setUser={setUser}/> 
     
     return (
-      <div fixed>
+      <div id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
         <SiteHeader handleLogOut={handleLogOut}/>
       {/* <LogIn user={user} setUser={setUser}/> */}
       <Switch>

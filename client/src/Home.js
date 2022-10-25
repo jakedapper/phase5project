@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { Link, useHistory } from "react-router-dom";
 import './Home.css'
+import background from './images/background.jpg'
 
 function Home({user}) {
 
@@ -30,12 +31,12 @@ function Home({user}) {
 
 
     return(
-        <Container maxWidth="md">
+        <div maxWidth="lg">
             {/* <h2>HI! WELCOME, {userVar.name}</h2> */}
             <div>
-                <h2>Check Out These Venue Reviews</h2>
-                <h3>A list of reviews of venues - feel free to submit your own as well!</h3>
+                
                 <Button  variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
+                <h3>A list of reviews of venues - feel free to submit your own as well!</h3>
             </div>
             <div>
                 <h2>Add Show To Tour!</h2>
@@ -52,7 +53,7 @@ function Home({user}) {
                 <p></p>
                 <Button  variant="contained" onClick={handleRestaurantsClick}>Nearby Retaurants</Button>
             </div>
-        </Container>
+        </div>
     )
 }
 
