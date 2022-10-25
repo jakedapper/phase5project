@@ -161,30 +161,30 @@ function App() {
       <div id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
         <SiteHeader handleLogOut={handleLogOut}/>
       {/* <LogIn user={user} setUser={setUser}/> */}
-      <Switch>
-        <Route exact path="/">
-          <Home user={user}/>
-        </Route>
-        <Route path="/venues">
-          <VenueReviews addNewReview={addNewReview} reviews={reviews} user={user} venues={venues}/>
-        </Route>
-        <Route path="/addNewShow">
-            <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
-        </Route>
-        <Route path="/myTour">
-          <UsersTour venues={venues} user={user} tours={tours}/>
-        </Route>
-        <Route path="/map">
-          <MapContainer user={user} venues={venues}/>
-        </Route>
-        <Route path="/restaurants">
-          <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
-        </Route>
-        <Route path="/exp">
-          <MaterialUi/>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <Home user={user}/>
+          </Route>
+          <Route path="/venues">
+            <VenueReviews addNewReview={addNewReview} reviews={reviews} user={user} venues={venues}/>
+          </Route>
+          <Route path="/addNewShow">
+              <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
+          </Route>
+          <Route path="/myTour">
+            <UsersTour venues={venues} user={user} tours={tours}/>
+          </Route>
+          <Route path="/map">
+            <MapContainer user={user} venues={venues}/>
+          </Route>
+          <Route path="/restaurants">
+            <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
+          </Route>
+          <Route path="/exp">
+            <MaterialUi/>
+          </Route>
 
-      </Switch>
+        </Switch>
     </div >
   )
 }

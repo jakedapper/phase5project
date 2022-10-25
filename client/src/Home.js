@@ -1,9 +1,12 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+
 import { Link, useHistory } from "react-router-dom";
 import './Home.css'
 import background from './images/background.jpg'
+import button1 from './images/button1.png'
+import button from './images/button2.png'
 
 function Home({user}) {
 
@@ -31,29 +34,28 @@ function Home({user}) {
 
 
     return(
-        <div maxWidth="lg">
+        <Grid id="home">
             {/* <h2>HI! WELCOME, {userVar.name}</h2> */}
-            <div>
-                
+            <div class="homeGridItems">
+                {/* <img src="button1" alt='venue-reviews'/> */}
                 <Button  variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
                 <h3>A list of reviews of venues - feel free to submit your own as well!</h3>
             </div>
-            <div>
-                <h2>Add Show To Tour!</h2>
-                <p></p>
+            <div class="homeGridItems">
+                {/* <img src={button1} alt='My-Tour-button'/> */}
                 <Button  variant="contained" onClick={handleShowsClick}>Add Show To Tour</Button>
             </div>
-            <div>
+            <div class="homeGridItems">
                 <h2></h2>
                 <p></p>
                 <Button  variant="contained" onClick={handleMyTourClick}>My Tour</Button>
             </div>
-            <div>
+            <div class="homeGridItems">
                 <h2></h2>
                 <p></p>
                 <Button  variant="contained" onClick={handleRestaurantsClick}>Nearby Retaurants</Button>
             </div>
-        </div>
+        </Grid>
     )
 }
 

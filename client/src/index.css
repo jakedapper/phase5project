@@ -14,7 +14,15 @@ code {
  */
 
 
+#home {
+  display: flex;
+  margin: 5px;
+}
 
+.homeGridItems {
+  margin: auto;
+  padding:5px;
+}
 
  #siteTitle {
   color: rgb(188, 240, 188);
