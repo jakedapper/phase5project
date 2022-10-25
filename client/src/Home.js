@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import { Link, useHistory } from "react-router-dom";
+import './Home.css'
 
 function Home({user}) {
 
@@ -28,14 +30,29 @@ function Home({user}) {
 
 
     return(
-        <div>
-            <h2>HOME PAGE</h2>
+        <Container maxWidth="md">
             {/* <h2>HI! WELCOME, {userVar.name}</h2> */}
-            <Button variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
-            <button onClick={handleShowsClick}>Add Show To Tour</button>
-            <button onClick={handleMyTourClick}>My Tour</button>
-            <button onClick={handleRestaurantsClick}>Nearby Retaurants</button>
-        </div>
+            <div>
+                <h2>Check Out These Venue Reviews</h2>
+                <h3>A list of reviews of venues - feel free to submit your own as well!</h3>
+                <Button  variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
+            </div>
+            <div>
+                <h2>Add Show To Tour!</h2>
+                <p></p>
+                <Button  variant="contained" onClick={handleShowsClick}>Add Show To Tour</Button>
+            </div>
+            <div>
+                <h2></h2>
+                <p></p>
+                <Button  variant="contained" onClick={handleMyTourClick}>My Tour</Button>
+            </div>
+            <div>
+                <h2></h2>
+                <p></p>
+                <Button  variant="contained" onClick={handleRestaurantsClick}>Nearby Retaurants</Button>
+            </div>
+        </Container>
     )
 }
 

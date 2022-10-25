@@ -1,9 +1,11 @@
 import React, { useState}  from 'react';
+import { useHistory } from "react-router-dom";
+
 import Calendar from 'react-calendar';
 import Geocode from "react-geocode";
 import CircularProgress from "@mui/material/CircularProgress"
 
-function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
+function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
     const [formVenueName, setFormVenueName] = useState("")
     const [formVenueAddress, setFormVenueAddress] = useState("")
     const [formCityName, setFormCityName] = useState("")
@@ -18,12 +20,13 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
     const [newShow, setNewShow] = useState("")
     const [newShowDate, onChange] = useState(new Date());
     const [venueCoordinates, setVenueCoordinates] = useState({})
-
-
+    
+    
+    let history = useHistory();
+    
     if (user === null){
       return(<CircularProgress />)
-  }
-
+    }
 
     console.log(newShowDate)
     console.log(user.id)
@@ -38,7 +41,6 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
          newCityName = formCityName
       }
     
-
 
      async function handleSubmit(e){
         e.preventDefault();
@@ -76,9 +78,10 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
         })
           const addedVenue = await res.json()
           updateVenues(addedVenue)
-          function postShows(addedVenue, city) {
+          
             console.log(user)
-            fetch("/shows", {
+
+            const showsResult = await fetch("/shows", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -93,12 +96,15 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                 venue_id: addedVenue.id,
                 user_id: user.id
               }),
-            }).then((res) => res.json())
-            .then((newShow)=>updateShows(newShow))
-          }
-          postShows(addedVenue, city)
+            })
+            const newShow = await showsResult.json()
+              updateShows(newShow)
+              setUpdateUser()
+              history.push("/myTour")
         }
+        // history.push("/myTour")
         venuePost(cityy, coords)
+
     }
     
     return(
