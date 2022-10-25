@@ -3,27 +3,51 @@ import React, { useEffect, useRef, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
+import Rest2 from './Rest2'
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 function Restaurants({ locallyStoredVenues, venues }) {
 
   const [selectedVenueId, setSelectedVenueId] = useState(1);
-  const [selectedVenue, setSelectedVenue] = useState({})
-  const [toggleCoords, setToggleCoords] = useState(false)
+  const [selectedVenue, setSelectedVenue] = useState({
+    "id": 1,
+    "name": "Hideout Theater",
+    "address": "1354 W Wabansia Ave, Chicago, IL 60642",
+    "city_id": 1,
+    "coordinates": {
+    "lat": 41.913872,
+    "lng": -87.662178
+    }
+    })
+  const [toggleCoords, setToggleCoords] = useState(true)
   
-
-  let myVenue 
+  console.log(selectedVenue)
+   
   useEffect(() =>{
-    myVenue = venues.find(({id}) => id == selectedVenueId)
+    let myVenue = venues.find(({id}) => id == selectedVenueId)
     console.log(myVenue)
+    setSelectedVenue(myVenue)
     setToggleCoords(!toggleCoords)
   },[selectedVenueId])
-  
+
+  useEffect(()=>{
+    console.log("okokokok")
+  },[toggleCoords])
 
   if (venues === []){
     return(<CircularProgress />)
   }   
+
+  let trueCoords
+
+  // if (toggleCoords){
+  //   trueCoords={lat: 30.2672, lng: -97.7431 }
+  // }else{
+  //   trueCoords={lat: myVenue.coordinates.lat, lng: myVenue.coordinates.lng} 
+  // }
+  
+  // toggleCoords ?  trueCoords = {lat: 30.2672, lng: -97.7431} : trueCoords = {lat: myVenue.coordinates.lat, lng: myVenue.coordinates.lng} 
 
   // let coordinates = {lat:-97, lng:33.33}
   
@@ -40,9 +64,9 @@ function Restaurants({ locallyStoredVenues, venues }) {
     width: '100%',
   };
 
-  return (
+  return selectedVenue ? (
+    
     <Container maxWidth="sm">
-      
       <select
         value={selectedVenueId}
         onChange={(e) => handleSelectedVenue(e)}
@@ -51,20 +75,39 @@ function Restaurants({ locallyStoredVenues, venues }) {
           <option key={venue.id} value={venue.id}>{venue.name}</option>
         ))}
       </select>
-
-      {/* <div id='map'></div> */}
       <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={15}
-          center={{lat: 30.2672, lng: -97.7431 }}
+          center={selectedVenue.coordinates}
           onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
         >
         </GoogleMap>
       </LoadScript>
-      
-    </Container >
-  );
+    </Container>
+  ) :
+  (<Container maxWidth="sm">
+  <select
+    value={selectedVenueId}
+    onChange={(e) => handleSelectedVenue(e)}
+  >
+    {venues.map((venue) => (
+      <option key={venue.id} value={venue.id}>{venue.name}</option>
+    ))}
+  </select>
+  <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
+    <GoogleMap
+      mapContainerStyle={mapStyles}
+      zoom={15}
+      center={{
+        "lat": 41.913872,
+        "lng": -87.662178
+        }}
+      onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
+    >
+    </GoogleMap>
+  </LoadScript>
+</Container>)
   
 }
 

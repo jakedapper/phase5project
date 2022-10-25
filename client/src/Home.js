@@ -39,21 +39,20 @@ function Home({user}) {
             <div class="homeGridItems">
                 {/* <img src="button1" alt='venue-reviews'/> */}
                 <Button  variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
-                <h3>A list of reviews of venues - feel free to submit your own as well!</h3>
+                <h3 class='buttonCaptions' id='venueButtonCaption'>A list of reviews of venues - feel free to submit your own as well!</h3>
             </div>
             <div class="homeGridItems">
                 {/* <img src={button1} alt='My-Tour-button'/> */}
                 <Button  variant="contained" onClick={handleShowsClick}>Add Show To Tour</Button>
+                <h3 class='buttonCaptions' >Got another gig?</h3>
             </div>
             <div class="homeGridItems">
-                <h2></h2>
-                <p></p>
                 <Button  variant="contained" onClick={handleMyTourClick}>My Tour</Button>
+                <h3 class='buttonCaptions' >See Your Shows</h3>
             </div>
             <div class="homeGridItems">
-                <h2></h2>
-                <p></p>
                 <Button  variant="contained" onClick={handleRestaurantsClick}>Nearby Retaurants</Button>
+                <h3 class='buttonCaptions' >Need Sustenance?</h3>
             </div>
         </Grid>
     )

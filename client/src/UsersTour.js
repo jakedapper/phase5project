@@ -14,7 +14,7 @@ function UsersTour({user, venues, tours}) {
     // let cities = tours.cities
     // console.log(shows)
     // console.log(shows.city_name)
-    var cardStyle = {
+    let cardStyle = {
         
         width: '30vw',
         transitionDuration: '0.3s',

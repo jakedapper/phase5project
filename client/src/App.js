@@ -12,6 +12,7 @@ import Restaurants from "./Restaurants"
 import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
 import './App.css'
+import Rest2 from './Rest2'
 import background from './images/background.jpg'
 // import VenueReviewForm from "./VenueReviewForm"
 
@@ -182,6 +183,9 @@ function App() {
           </Route>
           <Route path="/exp">
             <MaterialUi/>
+          </Route>
+          <Route path="/rest2">
+            <Rest2 />
           </Route>
 
         </Switch>

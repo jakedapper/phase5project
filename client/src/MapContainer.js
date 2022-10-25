@@ -21,7 +21,7 @@ function MapContainer({user, venues}){
     user.shows.map((show)=> console.log(show.venue_coordinates))
  
   return (
-     
+      <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={4.3}
@@ -31,7 +31,7 @@ function MapContainer({user, venues}){
             <Marker key={show.id} position={show.venue_coordinates}/>
           )}
         </GoogleMap>
-     
+      </LoadScript>
   )
 }
 

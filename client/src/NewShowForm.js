@@ -4,6 +4,12 @@ import { useHistory } from "react-router-dom";
 import Calendar from 'react-calendar';
 import Geocode from "react-geocode";
 import CircularProgress from "@mui/material/CircularProgress"
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input'
+import InputLabel from '@mui/material/InputLabel'
 
 function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
     const [formVenueName, setFormVenueName] = useState("")
@@ -20,6 +26,11 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
     const [newShow, setNewShow] = useState("")
     const [newShowDate, onChange] = useState(new Date());
     const [venueCoordinates, setVenueCoordinates] = useState({})
+    const [showCalendar, setShowCalendar] = useState(false)
+
+    function handleShowCalendar(){
+      setShowCalendar(!showCalendar)
+    }
     
     
     let history = useHistory();
@@ -108,28 +119,30 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
     }
     
     return(
-        <div>
+        <div id="newShowForm">
             <p>Add A Show</p>
             {/* <select value={selectedCity} onChange={(e)=>setSelectedCity(e.target.value)}>
                 {cities.map((city)=> <option key={city.id} value={city.name}>{city.name}</option>)}
             </select> */}
-            <Calendar onChange={onChange} value={newShowDate}/>
+            <Button onClick={handleShowCalendar}>Show Calendar</Button>
+            {showCalendar ? <Calendar onChange={onChange} value={newShowDate}/> : <></>}
             <form onSubmit={handleSubmit}>
                 <label>New City?</label>
                <input
-                   placeholder="Name of City"
-                   type="text"
-                   name="city name"
-                   onChange={(e)=>setFormCityName(e.target.value)}
-                   value={formCityName}
+                  variant='standard'
+                  placeholder="Name of City"
+                  type="text"
+                  name="city name"
+                  onChange={(e)=>setFormCityName(e.target.value)}
+                  value={formCityName}
                />
                 <label>Venue Name</label>
                 <input
-                    placeholder="Venue Name"
-                    type="text"
-                    name="venue_name"
-                    onChange={(e)=>setFormVenueName(e.target.value)}
-                    value={formVenueName}
+                  placeholder="Venue Name"
+                  type="text"
+                  name="venue_name"
+                  onChange={(e)=>setFormVenueName(e.target.value)}
+                  value={formVenueName}
                 />
                  <label>Venue Address</label>
                 <input
