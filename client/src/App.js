@@ -159,7 +159,7 @@ function App() {
   if (user === null) return <LogIn updateTours={updateTours} user={user} setUser={setUser}/> 
     
     return (
-      <div id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
+      <Container id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
         <SiteHeader handleLogOut={handleLogOut}/>
       {/* <LogIn user={user} setUser={setUser}/> */}
         <Switch>
@@ -173,7 +173,7 @@ function App() {
               <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
           </Route>
           <Route path="/myTour">
-            <UsersTour venues={venues} user={user} tours={tours}/>
+            <UsersTour venues={venues} user={user} tours={tours}setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} cities={cities} />
           </Route>
           <Route path="/map">
             <MapContainer user={user} venues={venues}/>
@@ -189,7 +189,7 @@ function App() {
           </Route>
 
         </Switch>
-    </div >
+    </Container >
   )
 }
 

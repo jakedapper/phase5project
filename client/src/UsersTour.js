@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import MapContainer from "./MapContainer"
-import CircularProgress from "@mui/material/CircularProgress"
-import Card from "@mui/material/Card"
+import MapContainer from './MapContainer'
+import NewShowForm from './NewShowForm'
+import CircularProgress from '@mui/material/CircularProgress'
+import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid';
 
-function UsersTour({user, venues, tours}) {
+
+function UsersTour({user, setUser, venues, tours, cities, updateCities, updateShows, updateVenues, setUpdateUser, }) {
     
     // if (user === null){
     //     return(<CircularProgress />)
@@ -42,6 +44,7 @@ function UsersTour({user, venues, tours}) {
             </Card>
             )}
             </Grid>
+            <NewShowForm setUpdateUser={setUpdateUser} user={user} updateCities={updateCities} updateShows={updateShows} updateVenues={updateVenues}/>
         </div>
     )
 }

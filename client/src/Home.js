@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import './Home.css'
 import background from './images/background.jpg'
 import button1 from './images/button1.png'
-import button from './images/button2.png'
+import button2 from './images/button2.png'
 
 function Home({user}) {
 
@@ -37,16 +37,16 @@ function Home({user}) {
         <Grid id="home">
             {/* <h2>HI! WELCOME, {userVar.name}</h2> */}
             <div class="homeGridItems">
-                {/* <img src="button1" alt='venue-reviews'/> */}
+                <img id='buttonOne'src={button1} alt='venue-reviews'/>
                 <Button  variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
                 <h3 class='buttonCaptions' id='venueButtonCaption'>A list of reviews of venues - feel free to submit your own as well!</h3>
             </div>
             <div class="homeGridItems">
-                {/* <img src={button1} alt='My-Tour-button'/> */}
                 <Button  variant="contained" onClick={handleShowsClick}>Add Show To Tour</Button>
                 <h3 class='buttonCaptions' >Got another gig?</h3>
             </div>
             <div class="homeGridItems">
+                <img id="buttonTwo" src={button2} alt='My-Tour-button'/>
                 <Button  variant="contained" onClick={handleMyTourClick}>My Tour</Button>
                 <h3 class='buttonCaptions' >See Your Shows</h3>
             </div>

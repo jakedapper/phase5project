@@ -17,9 +17,12 @@ code {
  .App{
   background-image: url(@import);
 } */
+html{
+  background-image: url('./images/background.jpg');
+}
 
 #biggestDiv{
-  margin-bottom: 1000px;
+ 
 }
 
 #home {
@@ -32,13 +35,27 @@ code {
   flex-direction: column;
   margin: auto;
   padding:15px;
-  
+  justify-content: center;
   align-items:center;
+  text-align: center;
+  margin-top: 150px;
   /* margin:auto */
+}
+
+#buttonOne {
+  height:200px;
+  padding: 15px
+}
+
+#buttonTwo {
+  height: 200px;
+  padding: 15px;
 }
 
 .buttonCaptions{
   color: white;
+  width:200px;
+  font-size: 17px;
 }
 
 #reviewDiv{
