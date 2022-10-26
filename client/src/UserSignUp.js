@@ -1,4 +1,7 @@
 import React, { useState}  from 'react';
+import FormControl from '@mui/material/FormControl'
+import FilledInput from '@mui/material/FilledInput'
+import Button from '@mui/material/Button'
 
 function UserSignUp ({updateTours,user, setUser}) {
     const [formName, setFormName] = useState("")
@@ -39,39 +42,38 @@ function UserSignUp ({updateTours,user, setUser}) {
     }
 
     return(
-        <div>
-            <p>signup</p>
-            <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input
+        <div id="signupForm">
+            <FormControl onSubmit={handleSubmit}>
+                <FilledInput
+                    class = "signupInputFields"
                     placeholder="Name"
                     type="text"
                     name="name"
                     onChange={(e)=>setFormName(e.target.value)}
                     value={formName}
                 />
-                <label>Username</label>
-                <input
+                <FilledInput
+                    class = "signupInputFields"
                     placeholder="Choose a username"
                     type="text"
                     name="username"
                     onChange={(e)=>setFormUsername(e.target.value)}
                     value={formUsername}
                 />
-                 <label>Password</label>
-                <input
+                <FilledInput
+                    class = "signupInputFields"
                     placeholder="Choose a password"
                     type="text"
                     name="password"
                     onChange={(e)=>setFormPassword(e.target.value)}
                     value={formPassword}
                 />
-
-                <input type="submit"/>
-            </form>
+                <FilledInput id="submitButton" type="submit"/>
+            </FormControl>
         </div>
     )
 }
+
 
 
 export default UserSignUp;

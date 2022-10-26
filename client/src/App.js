@@ -169,9 +169,9 @@ function App() {
           <Route path="/venues">
             <VenueReviews addNewReview={addNewReview} reviews={reviews} user={user} venues={venues}/>
           </Route>
-          <Route path="/addNewShow">
+          {/* <Route path="/addNewShow">
               <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
-          </Route>
+          </Route> */}
           <Route path="/myTour">
             <UsersTour venues={venues} user={user} tours={tours}setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} cities={cities} />
           </Route>

@@ -6,12 +6,12 @@ function VenueReviewForm ({venues, user, addNewReview}) {
     const [formSoundEngRating, setFormSoundEngRating] = useState("")
     const [formMerchCut, setFormMerchCut] = useState("")
     const [formComments, setFormComments] = useState("")
-    const [selectedVenue, setSelectedVenue] = useState(1)
+    const [selectedVenuee, setSelectedVenue] = useState(1)
 
     function handleSubmit(e) {
         e.preventDefault();
         
-        console.log(selectedVenue)
+        console.log(selectedVenuee)
         console.log(user.id)
 
         // const newReview = {
@@ -34,7 +34,7 @@ function VenueReviewForm ({venues, user, addNewReview}) {
             sound_engineer_rating: formSoundEngRating,
             merch_cut: formMerchCut,
             comments: formComments,
-            venue_id: selectedVenue,
+            venue_id: selectedVenuee,
             user_id: user.id
             }
           ),
@@ -47,7 +47,7 @@ function VenueReviewForm ({venues, user, addNewReview}) {
     return (
         <div>
             <p>Leave a Review</p>
-            <select value={selectedVenue} onChange={(e)=>setSelectedVenue(e.target.value)}>
+            <select value={selectedVenuee} onChange={(e)=>setSelectedVenue(e.target.value)}>
                 {venues.map((venue)=> <option key={venue.id} value={venue.id}>{venue.name}</option>)}
             </select>
             <form onSubmit={handleSubmit}>

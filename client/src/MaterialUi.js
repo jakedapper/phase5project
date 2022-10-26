@@ -18,7 +18,7 @@ function MaterialUi() {
         }
     };
     
-    fetch('https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=30.2672&longitude=-97.7431&limit=30&currency=USD&distance=2&open_now=false&lunit=mi&lang=en_US', options)
+    fetch('https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=41.913872&longitude=-87.662178&limit=30&currency=USD&distance=2&open_now=false&lunit=mi&lang=en_US', options)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));

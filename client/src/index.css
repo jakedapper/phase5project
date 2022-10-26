@@ -19,6 +19,11 @@ code {
 } */
 html{
   background-image: url('./images/background.jpg');
+  image: center;
+}
+
+#restaurantMapsContainer{
+
 }
 
 #biggestDiv{
@@ -41,16 +46,26 @@ html{
   margin-top: 150px;
   /* margin:auto */
 }
-
-#buttonOne {
-  height:200px;
-  padding: 15px
+#restaurantMapsContainer{
+  margin-bottom:100px;
+  padding: 50px
 }
 
-#buttonTwo {
+.homeButtonImg {
+  height:270px;
+  padding: 5px;
+  text-align: center;
+}
+
+/* #buttonTwo {
   height: 200px;
   padding: 15px;
 }
+
+#buttonThree {
+  height: 200px;
+  padding: 15px;
+} */
 
 .buttonCaptions{
   color: white;
@@ -115,6 +130,71 @@ html{
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#loginDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  position: absolute;
+  top: 15%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+#loginTitle {
+  color:bisque;
+  font-size: 100px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+#formlabels {
+  color:rgb(252, 144, 11);
+  background-color:white
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  background-color: antiquewhite;
+}
+
+.loginFormField {
+  variant: filled;
+  margin-top: 5px;
+  background-color: antiquewhite;
+}
+
+#venueSelector{
+  background-color: aliceblue;
+}
+
+#signupButton {
+  margin-top: 5px;
+}
+
+#signupForm {
+  background-color: white;
+  opacity: 80%
+}
+
+.signupFields {
+  margin-top: 3px;
+}
+
+#filledButton{
+  background-color: rgb(253, 206, 206);
+  padding: 10px;
+  display:flex;
   justify-content: center;
   align-items: center;
 }
