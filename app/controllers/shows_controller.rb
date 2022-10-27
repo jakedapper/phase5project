@@ -10,6 +10,18 @@ class ShowsController < ApplicationController
         render json: show, status: :ok
     end 
 
+    def update
+        show = Show.find(params[:id])
+        show.update(show_params)
+        render json: show, status: :created
+    end
+
+    def destroy
+        show = Show.find(params[:id])
+        show.destroy
+        head :no_content
+    end
+
     private
 
     def show_params

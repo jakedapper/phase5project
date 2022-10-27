@@ -40,12 +40,12 @@ function VenueReviews({user, venues, addNewReview}) {
  
 
     return (
-      <div>
+      <div id="biggerReviewDiv">
         <div id='reviewDiv'>
-            {venues.map((venue) => <VenueItem venue={venue}/>)}
+            {venues.map((venue) => <VenueItem user={user} key={venue.id} venue={venue}/>)}
         </div>
             <Button id="formButton" variant="contained" onClick={handleFormShowClick}>Leave A Review?</Button>
-            {displayForm ? <VenueReviewForm addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
+            {displayForm ? <VenueReviewForm id="reviewForm" addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
       </div>
     )
 }

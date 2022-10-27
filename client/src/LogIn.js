@@ -56,13 +56,13 @@ function LogIn({ updateTours, user, setUser}) {
                     <input 
                         class = "loginFormField"
                         placeholder="Enter Password" 
-                        type="text" 
+                        type="password" 
                         name="password" 
                         onChange={(e)=>setPassword(e.target.value)} 
                         value={password}
                     />
                     
-                    <input type="submit"/>
+                    <input id="submitLoginButton" type="submit"/>
                 </form> 
             </div>
             <Button id="signupButton" variant="contained" onClick={handleNewUserClick}> New User? Need To Sign-Up?</Button>

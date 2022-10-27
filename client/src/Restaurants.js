@@ -88,7 +88,7 @@ function Restaurants({ locallyStoredVenues, venues }) {
       .then((data)=>setFetchResults(data.data))
 
       console.log("inside function", fetchResults)
-    }, "3000")
+    }, "0000")
     }
     console.log(fetchResults)
 
@@ -98,7 +98,7 @@ function Restaurants({ locallyStoredVenues, venues }) {
       if(selectedVenue !== undefined || {}){
       setTimeout(()=>{
       getRestaurants()
-      }, "3000")
+      }, "0000")
       }
     }, [selectedVenue])
 
@@ -126,10 +126,10 @@ function Restaurants({ locallyStoredVenues, venues }) {
     width: '100%',
   };
 
-  let iconMarker = new window.google.maps.MarkerImage(
-    "https://lh3.googleusercontent.com/bECXZ2YW3j0yIEBVo92ECVqlnlbX9ldYNGrCe0Kr4VGPq-vJ9Xncwvl16uvosukVXPfV=w300",
-    new window.google.maps.Size(32, 32)
-);
+//   let iconMarker = new window.google.maps.MarkerImage(
+//     "https://lh3.googleusercontent.com/bECXZ2YW3j0yIEBVo92ECVqlnlbX9ldYNGrCe0Kr4VGPq-vJ9Xncwvl16uvosukVXPfV=w300",
+//     new window.google.maps.Size(32, 32)
+// );
 
   // add this conditional to return:  && fetchResults.length !== 0
   return fetchResults.length > 0 ? (
@@ -149,17 +149,21 @@ function Restaurants({ locallyStoredVenues, venues }) {
       <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={14.44}
+          zoom={13.8}
           center={selectedVenue.coordinates}
           onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
         >
-        <Marker icon={iconMarker} key={1} position={selectedVenue.coordinates}/>
+        <Marker  key={1} position={selectedVenue.coordinates}/>
         {fetchResults.map((restaurant)=>
           <Marker onClick={()=>handleSelectedRestaurant(restaurant)} key={restaurant.name} position={{"lat": parseFloat(restaurant.latitude), "lng": parseFloat(restaurant.longitude)}}/>
         )}
         {selectedRestaurant && 
           <InfoWindow onCloseClick={handleCloseClick} position={{"lat": parseFloat(selectedRestaurant.latitude), "lng": parseFloat(selectedRestaurant.longitude)}}>
+            <div>
             <h2>{selectedRestaurant.name}</h2>
+            <h2>{selectedRestaurant.address}</h2>
+            <h2>{selectedRestaurant.open_now_text}</h2>
+            </div>
           </InfoWindow>}
         </GoogleMap>
       </LoadScript>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :reviews
-  resources :shows
+  resources :shows, only: [:index, :create, :update, :destroy]
   resources :venues
   resources :cities
   resources :tours

@@ -14,6 +14,7 @@ import Container from "@mui/material/Container"
 import './App.css'
 import Rest2 from './Rest2'
 import background from './images/background.jpg'
+
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -30,6 +31,7 @@ function App() {
   const [cities, setCities] = useState([])
   const [shows, setShows] = useState([])
   const [updateUser, _setUpdateUser] = useState(false)
+  
   
   let history = useHistory();
 
@@ -148,6 +150,22 @@ function App() {
       setTours([...tours, newTour])
     }
 
+    function deleteShow(e){
+      console.log(e.target.id)
+      fetch(`/shows/${e.target.id}`, {
+          method: 'DELETE',
+      })
+      .then(fetch('/shows')
+              .then((res)=>res.json())
+              .then(data=>setShows(data)))
+      window.location.reload();
+      history.push('/myTour')
+      }
+
+  function navToHome () {
+    history.push("/")
+  }
+
     let locallyStoredVenues = []
     locallyStoredVenues = venues
     function updateVenues(newVenue){
@@ -160,7 +178,7 @@ function App() {
     
     return (
       <Container id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
-        <SiteHeader handleLogOut={handleLogOut}/>
+        <SiteHeader navToHome={navToHome} handleLogOut={handleLogOut}/>
       {/* <LogIn user={user} setUser={setUser}/> */}
         <Switch>
           <Route exact path="/">
@@ -173,7 +191,7 @@ function App() {
               <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
           </Route> */}
           <Route path="/myTour">
-            <UsersTour venues={venues} user={user} tours={tours}setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} cities={cities} />
+            <UsersTour deleteShow={deleteShow} setShows={setShows} venues={venues} user={user} tours={tours}setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} cities={cities} />
           </Route>
           <Route path="/map">
             <MapContainer user={user} venues={venues}/>
