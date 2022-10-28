@@ -8,7 +8,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY&libraries=places&callback=initMap"async></script>
+{/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY&libraries=places&callback=initMap"async></script> */}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

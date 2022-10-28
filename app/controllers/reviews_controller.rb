@@ -10,6 +10,12 @@ class ReviewsController < ApplicationController
         render json: review, status: :ok
     end 
 
+    def update
+        review = Review.find(params[:id])
+        review.update!(production_params)
+        render json: review, status: :created
+    end
+
 
     private
 

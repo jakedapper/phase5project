@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import VenueReviewForm from "./VenueReviewForm"
 import VenueItem from "./VenueItem"
 import CircularProgress from "@mui/material/CircularProgress"
+import Button from "@mui/material/Button"
 
 function VenueReviews({user, venues, addNewReview}) {
   const [displayForm, setDisplayForm] = useState(false)
@@ -39,11 +40,12 @@ function VenueReviews({user, venues, addNewReview}) {
  
 
     return (
-      <div>
-          <h3> hello venue reviews coming soon</h3>
-          {venues.map((venue) => <VenueItem venue={venue}/>)}
-          <button onClick={handleFormShowClick}>Leave A Review?</button>
-          {displayForm ? <VenueReviewForm addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
+      <div id="biggerReviewDiv">
+        <div id='reviewDiv'>
+            {venues.map((venue) => <VenueItem user={user} key={venue.id} venue={venue}/>)}
+        </div>
+            <Button id="formButton" variant="contained" onClick={handleFormShowClick}>Leave A Review?</Button>
+            {displayForm ? <VenueReviewForm id="reviewForm" addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
       </div>
     )
 }

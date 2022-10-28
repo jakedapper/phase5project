@@ -1,9 +1,17 @@
 import React, { useState}  from 'react';
+import { useHistory } from "react-router-dom";
+
 import Calendar from 'react-calendar';
 import Geocode from "react-geocode";
 import CircularProgress from "@mui/material/CircularProgress"
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
 
-function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input'
+import InputLabel from '@mui/material/InputLabel'
+
+function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities, updateShows, updateVenues}) {
     const [formVenueName, setFormVenueName] = useState("")
     const [formVenueAddress, setFormVenueAddress] = useState("")
     const [formCityName, setFormCityName] = useState("")
@@ -18,12 +26,18 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
     const [newShow, setNewShow] = useState("")
     const [newShowDate, onChange] = useState(new Date());
     const [venueCoordinates, setVenueCoordinates] = useState({})
+    const [showCalendar, setShowCalendar] = useState(false)
 
-
+    function handleShowCalendar(){
+      setShowCalendar(!showCalendar)
+    }
+    
+    
+    let history = useHistory();
+    
     if (user === null){
       return(<CircularProgress />)
-  }
-
+    }
 
     console.log(newShowDate)
     console.log(user.id)
@@ -38,7 +52,6 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
          newCityName = formCityName
       }
     
-
 
      async function handleSubmit(e){
         e.preventDefault();
@@ -76,9 +89,10 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
         })
           const addedVenue = await res.json()
           updateVenues(addedVenue)
-          function postShows(addedVenue, city) {
+          
             console.log(user)
-            fetch("/shows", {
+
+            const showsResult = await fetch("/shows", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -93,41 +107,49 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                 venue_id: addedVenue.id,
                 user_id: user.id
               }),
-            }).then((res) => res.json())
-            .then((newShow)=>updateShows(newShow))
-          }
-          postShows(addedVenue, city)
+            })
+            const newShow = await showsResult.json()
+              updateShows(newShow)
+              setUpdateUser()
+              history.push("/myTour")
         }
+        // history.push("/myTour")
         venuePost(cityy, coords)
+
     }
     
     return(
-        <div>
-            <p>Add A Show</p>
+        <div id="newShowForm">
+            <h2 id="addShowTitle">Add A Show</h2>
             {/* <select value={selectedCity} onChange={(e)=>setSelectedCity(e.target.value)}>
                 {cities.map((city)=> <option key={city.id} value={city.name}>{city.name}</option>)}
             </select> */}
-            <Calendar onChange={onChange} value={newShowDate}/>
-            <form onSubmit={handleSubmit}>
+            <Button id="showCalendarButton" size="small" onClick={handleShowCalendar}>Choose A Date</Button>
+            {showCalendar ? <Calendar onChange={onChange} value={newShowDate}/> : <></>}
+            <form id="actualNewShowForm" onSubmit={handleSubmit}>
                 <label>New City?</label>
                <input
-                   placeholder="Name of City"
-                   type="text"
-                   name="city name"
-                   onChange={(e)=>setFormCityName(e.target.value)}
-                   value={formCityName}
+                  variant='standard'
+                  placeholder="Name of City"
+                  class="showFormInputs"
+                  type="text"
+                  name="city name"
+                  onChange={(e)=>setFormCityName(e.target.value)}
+                  value={formCityName}
                />
                 <label>Venue Name</label>
                 <input
-                    placeholder="Venue Name"
-                    type="text"
-                    name="venue_name"
-                    onChange={(e)=>setFormVenueName(e.target.value)}
-                    value={formVenueName}
+                  placeholder="Venue Name"
+                  class="showFormInputs"
+                  type="text"
+                  name="venue_name"
+                  onChange={(e)=>setFormVenueName(e.target.value)}
+                  value={formVenueName}
                 />
                  <label>Venue Address</label>
                 <input
                     placeholder="1234 Main Ave, City, State, Zipcode"
+                    class="showFormInputs"
                     type="text"
                     name="Venue Address"
                     onChange={(e)=>setFormVenueAddress(e.target.value)}
@@ -144,6 +166,7 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                  <label>Doors</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="doors_time"
                     onChange={(e)=>setFormShowDoors(e.target.value)}
@@ -152,6 +175,7 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                  <label>Sound Check</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="sound_check"
                     onChange={(e)=>setFormShowSoundcheck(e.target.value)}
@@ -160,6 +184,7 @@ function NewShowForm ({user, setUser, tours, cities, updateCities, updateShows, 
                  <label>Set Time</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="set_time"
                     onChange={(e)=>setFormShowSetTime(e.target.value)}

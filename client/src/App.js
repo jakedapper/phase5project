@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import VenueReviews from "./VenueReviews"
+import SiteHeader from './SiteHeader'
 import Home from "./Home"
 import LogIn from "./LogIn"
 import LogOut from "./LogOut"
@@ -9,6 +10,11 @@ import UsersTour from "./UsersTour"
 import MapContainer from "./MapContainer"
 import Restaurants from "./Restaurants"
 import MaterialUi from "./MaterialUi";
+import Container from "@mui/material/Container"
+import './App.css'
+import Rest2 from './Rest2'
+import background from './images/background.jpg'
+
 // import VenueReviewForm from "./VenueReviewForm"
 
 
@@ -24,8 +30,19 @@ function App() {
   const [tours, setTours] = useState([])
   const [cities, setCities] = useState([])
   const [shows, setShows] = useState([])
+  const [updateUser, _setUpdateUser] = useState(false)
+  
   
   let history = useHistory();
+
+  // useEffect(() => {
+  //   fetch("/nearby")
+  //   .then((res)=> res.json())
+  //   .then((coords) => console.log(coords))
+  // }, [])
+  function setUpdateUser(){
+    _setUpdateUser(previousState => !previousState)
+  }
 
   useEffect(() => {
     // auto-login
@@ -34,15 +51,14 @@ function App() {
     .then((r) => {
       if (r.ok) {
         r.json()
-        .then((user) => {
-          setUser(user)
+        .then((user) => {setUser(user)
         });
       }
     })
     .finally(() => {
       setLoading(false)
     })
-    }, []);
+    }, [updateUser]);
 
   let userVar = user
   // console.log(user.shows)
@@ -134,6 +150,22 @@ function App() {
       setTours([...tours, newTour])
     }
 
+    function deleteShow(e){
+      console.log(e.target.id)
+      fetch(`/shows/${e.target.id}`, {
+          method: 'DELETE',
+      })
+      .then(fetch('/shows')
+              .then((res)=>res.json())
+              .then(data=>setShows(data)))
+      window.location.reload();
+      history.push('/myTour')
+      }
+
+  function navToHome () {
+    history.push("/")
+  }
+
     let locallyStoredVenues = []
     locallyStoredVenues = venues
     function updateVenues(newVenue){
@@ -145,31 +177,37 @@ function App() {
   if (user === null) return <LogIn updateTours={updateTours} user={user} setUser={setUser}/> 
     
     return (
-      <div>
+      <Container id="biggestDiv" style={{ backgroundImage: `url(${background})` }}>
+        <SiteHeader navToHome={navToHome} handleLogOut={handleLogOut}/>
       {/* <LogIn user={user} setUser={setUser}/> */}
-      <LogOut handleLogOut={handleLogOut}/>
-      <Switch>
-        <Route exact path="/">
-          <Home user={user}/>
-        </Route>
-        <Route path="/venues">
-          <VenueReviews addNewReview={addNewReview} user={user} venues={venues}/>
-        </Route>
-        <Route path="/addNewShow">
-            <NewShowForm  updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
-        </Route>
-        <Route path="/myTour">
-          <UsersTour venues={venues} user={user} tours={tours}/>
-        </Route>
-        <Route path="/map">
-          <MapContainer user={user} venues={venues}/>
-        </Route>
-        <Route path="/restaurants">
-          <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <Home user={user}/>
+          </Route>
+          <Route path="/venues">
+            <VenueReviews addNewReview={addNewReview} reviews={reviews} user={user} venues={venues}/>
+          </Route>
+          {/* <Route path="/addNewShow">
+              <NewShowForm  setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} user={user} cities={cities} tours={tours}/>
+          </Route> */}
+          <Route path="/myTour">
+            <UsersTour deleteShow={deleteShow} setShows={setShows} venues={venues} user={user} tours={tours}setUpdateUser={setUpdateUser} updateShows={updateShows} updateCities={updateCities} updateVenues={updateVenues} cities={cities} />
+          </Route>
+          <Route path="/map">
+            <MapContainer user={user} venues={venues}/>
+          </Route>
+          <Route path="/restaurants">
+            <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
+          </Route>
+          <Route path="/exp">
+            <MaterialUi/>
+          </Route>
+          <Route path="/rest2">
+            <Rest2 />
+          </Route>
 
-      </Switch>
-    </div>
+        </Switch>
+    </Container >
   )
 }
 
