@@ -136,6 +136,18 @@ html{
   cursor: pointer;
 }
 
+#newShowForm{
+  margin-top:10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+#userTourDiv {
+  display:flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
   /* @keyframes x {
     from {
       margin-left: 0%;
@@ -377,4 +389,44 @@ html{
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+#showCard{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+#newShowForm {
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#showCalendarButton{
+  outline:auto;
+  margin-top:8px;
+  margin:8px;
+}
+
+#actualNewShowForm{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:5px;
+}
+
+.showFormInputs {
+  margin: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#addShowTitle{
+  margin-left: 10px;
 }

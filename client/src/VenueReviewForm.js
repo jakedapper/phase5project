@@ -12,11 +12,18 @@ function VenueReviewForm ({venues, user, addNewReview}) {
     const [formComments, setFormComments] = useState("")
     const [selectedVenuee, setSelectedVenue] = useState(1)
 
+    let reviews = user.reviews
+    console.log(Array.isArray(reviews))
+
+
     function handleSubmit(e) {
         e.preventDefault();
         
         console.log(selectedVenuee)
         console.log(user.id)
+    
+
+        
 
         // const newReview = {
         //     greenroom_rating: formGreenRoomRating,
@@ -27,25 +34,30 @@ function VenueReviewForm ({venues, user, addNewReview}) {
         //     user_id: user.id
         // }
 
-        fetch("/reviews", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(
-            {
-            greenroom_rating: formGreenRoomRating,
-            sound_engineer_rating: formSoundEngRating,
-            merch_cut: formMerchCut,
-            comments: formComments,
-            venue_id: selectedVenuee,
-            user_id: user.id
-            }
-          ),
-        })
-        .then((res) => res.json())
-        .then((newReview) => addNewReview(newReview))
+        // if(reviews.some(review => review.venue_id !== selectedVenuee.id)){
         
+            fetch("/reviews", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+                {
+                greenroom_rating: formGreenRoomRating,
+                sound_engineer_rating: formSoundEngRating,
+                merch_cut: formMerchCut,
+                comments: formComments,
+                venue_id: selectedVenuee,
+                user_id: user.id
+                }
+            ),
+            })
+            .then((res) => res.json())
+            
+            window.location.reload()
+        // }else{
+        //     alert("You can only leave one review per venue")
+        // }
     }
 
     return (

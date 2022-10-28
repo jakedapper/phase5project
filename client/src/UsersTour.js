@@ -68,7 +68,7 @@ function UsersTour({editShow, deleteShow, user, setShows, setUser, venues, tours
     
     
     return (
-        <div class="showInfo">
+        <div id="userTourDiv" class="showInfo">
             <MapContainer user={user} venues={venues}/>
             <Grid container
             spacing={0}
@@ -77,13 +77,13 @@ function UsersTour({editShow, deleteShow, user, setShows, setUser, venues, tours
             justify="center"
             >
             {shows.map((show) => 
-            <Card style={cardStyle} variant="outlined">
+            <Card id="showCard" style={cardStyle} variant="outlined">
                 <h3>{show.city_name}</h3>
                 <h3>{show.date}</h3>
                 <h3>Doors: {show.doors_time}</h3>
                 <h3>SoundCheck: {show.soundcheck_time}</h3>
                 <h3>Set Time: {show.soundcheck_time}</h3>
-                {/* <button id={show.id} onClick={deleteShow}>Cancel Show</button> */}
+                <button id={show.id} onClick={deleteShow}>Cancel Show</button>
                 {/*  */}
                 {/* { toggle ? 
                 <form>
@@ -97,7 +97,7 @@ function UsersTour({editShow, deleteShow, user, setShows, setUser, venues, tours
             </Card>
             )}
             </Grid>
-            <NewShowForm setUpdateUser={setUpdateUser} user={user} updateCities={updateCities} updateShows={updateShows} updateVenues={updateVenues}/>
+            <NewShowForm id="newShowForm" setUpdateUser={setUpdateUser} user={user} updateCities={updateCities} updateShows={updateShows} updateVenues={updateVenues}/>
         </div>
     )
 }

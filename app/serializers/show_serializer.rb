@@ -13,5 +13,4 @@ class ShowSerializer < ActiveModel::Serializer
     {lat: object.venue.lat, lng: object.venue.lng}
   end
 
-
 end

@@ -120,17 +120,18 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
     
     return(
         <div id="newShowForm">
-            <p>Add A Show</p>
+            <h2 id="addShowTitle">Add A Show</h2>
             {/* <select value={selectedCity} onChange={(e)=>setSelectedCity(e.target.value)}>
                 {cities.map((city)=> <option key={city.id} value={city.name}>{city.name}</option>)}
             </select> */}
-            <Button onClick={handleShowCalendar}>Show Calendar</Button>
+            <Button id="showCalendarButton" size="small" onClick={handleShowCalendar}>Choose A Date</Button>
             {showCalendar ? <Calendar onChange={onChange} value={newShowDate}/> : <></>}
-            <form onSubmit={handleSubmit}>
+            <form id="actualNewShowForm" onSubmit={handleSubmit}>
                 <label>New City?</label>
                <input
                   variant='standard'
                   placeholder="Name of City"
+                  class="showFormInputs"
                   type="text"
                   name="city name"
                   onChange={(e)=>setFormCityName(e.target.value)}
@@ -139,6 +140,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
                 <label>Venue Name</label>
                 <input
                   placeholder="Venue Name"
+                  class="showFormInputs"
                   type="text"
                   name="venue_name"
                   onChange={(e)=>setFormVenueName(e.target.value)}
@@ -147,6 +149,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
                  <label>Venue Address</label>
                 <input
                     placeholder="1234 Main Ave, City, State, Zipcode"
+                    class="showFormInputs"
                     type="text"
                     name="Venue Address"
                     onChange={(e)=>setFormVenueAddress(e.target.value)}
@@ -163,6 +166,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
                  <label>Doors</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="doors_time"
                     onChange={(e)=>setFormShowDoors(e.target.value)}
@@ -171,6 +175,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
                  <label>Sound Check</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="sound_check"
                     onChange={(e)=>setFormShowSoundcheck(e.target.value)}
@@ -179,6 +184,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
                  <label>Set Time</label>
                 <input
                     placeholder="00:00"
+                    class="showFormInputs"
                     type="text"
                     name="set_time"
                     onChange={(e)=>setFormShowSetTime(e.target.value)}
