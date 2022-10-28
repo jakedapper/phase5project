@@ -324,11 +324,17 @@ html{
   transform: translateX(-50%);
 }
 
+@keyframes myOrbit {
+  from {transform: rotate(0deg) translateX(5px) rotate(0deg); }
+  to   {transform: rotate(360deg) translateX(5px) rotate(-360deg); }
+}
+
 #loginTitle {
   color:bisque;
   font-size: 100px;
   padding: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  animation: myOrbit 2s linear infinite;
 }
 
 #formlabels {

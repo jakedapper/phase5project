@@ -1,4 +1,4 @@
-u1 = User.create(name: "ACDC", username: "acdc", password: "rocknroll")
+u1 = User.create(name: "ACDC", username: "acdc", password: "rocknroll1992")
 u2 = User.create(name: "Lizard Man", username: "lizardman", password: "1234")
 u3 = User.create(name: "Jason", username: "managerjason", password: "1234")
 
