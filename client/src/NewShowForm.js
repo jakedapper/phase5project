@@ -1,4 +1,4 @@
-import React, { useState}  from 'react';
+import React, { useEffect, useState}  from 'react';
 import { useHistory } from "react-router-dom";
 
 import Calendar from 'react-calendar';
@@ -27,6 +27,15 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
     const [newShowDate, onChange] = useState(new Date());
     const [venueCoordinates, setVenueCoordinates] = useState({})
     const [showCalendar, setShowCalendar] = useState(false)
+
+
+let dependencyArray
+
+
+
+    useEffect(()=>{
+      console.log("hello world")
+    }, [dependencyArray])
 
     function handleShowCalendar(){
       setShowCalendar(!showCalendar)
@@ -198,3 +207,7 @@ function NewShowForm ({setUpdateUser, user, setUser, tours, cities, updateCities
 
 
 export default NewShowForm;
+
+
+
+

@@ -9,7 +9,7 @@ import Rest2 from './Rest2'
 import lilHouse from './images/lilHouse.png'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
-function Restaurants({ locallyStoredVenues, venues }) {
+function Restaurants({ locallyStoredVenues, venues, user }) {
   
   // console.log(locallyStoredVenues[0].coordinates)
  
@@ -19,14 +19,16 @@ function Restaurants({ locallyStoredVenues, venues }) {
   const [fetchResults, setFetchResults]= useState([])
   const [selectedRestaurant,setSelectedRestaurant] = useState(null)
   
-  console.log(selectedVenue)
-   
+  
+  console.log(user.venues)
+
   useEffect(() =>{
+    setTimeout(()=>{
     let myVenue = venues.find(({id}) => id == selectedVenueId)
     console.log(myVenue)
     if(selectedVenue !== {}){
     setSelectedVenue(myVenue)
-    }
+    }}, 2000)
     // setToggleCoords(!toggleCoords)
   },[selectedVenueId])
 
@@ -142,7 +144,7 @@ function Restaurants({ locallyStoredVenues, venues }) {
         onChange={(e) => handleSelectedVenue(e)}
       >
         <MenuItem value="">---Select A Venue Below---</MenuItem>
-        {venues.map((venue) => (
+        {user.venues.map((venue) => (
           <MenuItem key={venue.id} value={venue.id}>{venue.name}</MenuItem>
         ))}
       </Select>
@@ -177,7 +179,7 @@ function Restaurants({ locallyStoredVenues, venues }) {
     onChange={(e) => handleSelectedVenue(e)}
   >
     <MenuItem value="">---Select A Venue Below---</MenuItem>
-    {venues.map((venue) => (
+    {user.venues.map((venue) => (
       <MenuItem key={venue.id} value={venue.id}>{venue.name}</MenuItem>
     ))}
   </Select>

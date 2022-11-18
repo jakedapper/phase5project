@@ -23,7 +23,7 @@ body {
   height: 20vh;
 }
 
-@keyframes x {
+/* @keyframes x {
   100% {
     transform: translateX(200px);
 }
@@ -33,7 +33,7 @@ body {
   100% {
     transform: translateY(250px);
   }
-} 
+}  */
 
 /* .section {
   height: 400px;
