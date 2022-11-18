@@ -14,8 +14,30 @@ function VenueReviewForm ({venues, user, addNewReview}) {
 
     let reviews = user.reviews
     
+    let userVenues = user.venues
+    // availableVenues = venues.filter(venue => venue.name !== userVenues.includes(venue.name))
+
+    // const availableVenues = venues.filter(venue => userVenues.includes(venue))
+
+    // console.log(userVenues)
+    
+    const filteredVenues = (venues, userVenues) => {
+        let res = venues.filter((venue)=>{
+            return !userVenues.find(ven => {
+                return ven.name === venue.name
+            })
+        })
+        return res
+    }
+    
+    let availableVenues = filteredVenues(venues, userVenues)
+  
+    
     // console.log(selectedVenuee)
     // console.log(reviews.some(review => review.venue_id !== selectedVenuee))
+
+
+
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -54,7 +76,7 @@ function VenueReviewForm ({venues, user, addNewReview}) {
             <h4>Leave a Review</h4>
             <select value={selectedVenuee} onChange={(e)=>setSelectedVenue(e.target.value)}>
                 <option value="">---Select A Venue Below---</option>
-                {venues.map((venue)=> <option key={venue.id} value={venue.id}>{venue.name}</option>)}
+                {availableVenues.map((venue)=> <option key={venue.id} value={venue.id}>{venue.name}</option>)}
             </select>
             <form onSubmit={handleSubmit}>
                 <label>Green Room Rating</label>

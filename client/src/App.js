@@ -197,7 +197,7 @@ function App() {
             <MapContainer user={user} venues={venues}/>
           </Route>
           <Route path="/restaurants">
-            <Restaurants locallyStoredVenues={locallyStoredVenues} venues={venues}/>
+            <Restaurants user={user} locallyStoredVenues={locallyStoredVenues} venues={venues}/>
           </Route>
           <Route path="/exp">
             <MaterialUi/>
