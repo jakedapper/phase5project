@@ -15,11 +15,6 @@ function VenueReviewForm ({venues, user, addNewReview}) {
     let reviews = user.reviews
     
     let userVenues = user.venues
-    // availableVenues = venues.filter(venue => venue.name !== userVenues.includes(venue.name))
-
-    // const availableVenues = venues.filter(venue => userVenues.includes(venue))
-
-    // console.log(userVenues)
     
     const filteredVenues = (venues, userVenues) => {
         let res = venues.filter((venue)=>{
@@ -31,13 +26,6 @@ function VenueReviewForm ({venues, user, addNewReview}) {
     }
     
     let availableVenues = filteredVenues(venues, userVenues)
-  
-    
-    // console.log(selectedVenuee)
-    // console.log(reviews.some(review => review.venue_id !== selectedVenuee))
-
-
-
 
     function handleSubmit(e) {
         e.preventDefault();

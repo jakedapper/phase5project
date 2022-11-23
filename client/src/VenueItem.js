@@ -12,7 +12,6 @@ const [formComments,setFormComments] = useState("")
     let reviews = venue.reviews
     // console.log(reviews)
     var cardStyle = {
-        
         width: '30vw',
         transitionDuration: '0.3s',
         height: 'auto',
