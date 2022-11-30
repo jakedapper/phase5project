@@ -79,6 +79,7 @@ html{
   transform: scale(1.2) slow;
   animation-play-state:paused;
   cursor: pointer;
+  margin:auto;
 }
 
 #xTwo {
@@ -100,6 +101,7 @@ html{
   margin: auto;
   display:flex;
   align-items: center;
+  padding: -10px;
 }
 
 #yTwo {
@@ -386,7 +388,7 @@ html{
 
 #submitLoginButton {
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 #filledButton{
