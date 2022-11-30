@@ -9,10 +9,6 @@ import button1 from './images/button1.png'
 import button2 from './images/button2.png'
 import button3 from './images/button3.png'
 
-
-
-
-
 function Home({user}) {
 
     let history = useHistory();
@@ -44,11 +40,11 @@ function Home({user}) {
         <Grid id="home">
             <div id="containerr">
             {/* <h2>HI! WELCOME, {userVar.name}</h2> */}
-           <div id="y" scrollamount="0">
-                <div id="x">
+           <div id="x" scrollamount="0">
+                <div id="y">
                     <img class="homeButtonImg" id='homeButtonImgOne'src={button1} alt='venue-reviews'/>
                     <Button   id="buttonVenueReviews" variant="contained" onClick={handleReviewsClick}>Venue Reviews</Button>
-                    <h3 class='buttonCaptions' id='venueButtonCaption'>A list of reviews of venues - feel free to submit your own as well!</h3>
+                    <h3 class='buttonCaptions' id='venueButtonCaption'>Read Or Submit!</h3>
                 </div>
             </div>
             {/* <div class="homeGridItems">

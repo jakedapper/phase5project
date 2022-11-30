@@ -66,20 +66,11 @@ html{
 }
 
 #x {
-  animation: x 18s linear infinite alternate;
-  display:flex;
-  flex-direction: column;
+  animation: y 25s linear infinite alternate;
   margin: auto;
-  justify-content: center;
-  align-items:center;
-  text-align: center; 
-}
-
-#y:hover{
-  transform: scale(1.2) slow;
-  animation-play-state:paused;
-  cursor: pointer;
-  margin:auto;
+  display:flex;
+  align-items: center;
+  padding: -10px;
 }
 
 #xTwo {
@@ -97,11 +88,13 @@ html{
 }
 
 #y {
-  animation: y 25s linear infinite alternate;
-  margin: auto;
+  animation: x 18s linear infinite alternate;
   display:flex;
-  align-items: center;
-  padding: -10px;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items:center;
+  text-align: center; 
 }
 
 #yTwo {
