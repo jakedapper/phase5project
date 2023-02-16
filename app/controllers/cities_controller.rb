@@ -6,7 +6,6 @@ class CitiesController < ApplicationController
         render json: City.all, status: :ok
     end
 
-
     def create
         city = City.create!(city_params)
         render json: city, status: :ok
