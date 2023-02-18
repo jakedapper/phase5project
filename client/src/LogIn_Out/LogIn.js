@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserSignUp from "./UserSignUp"
+import UserSignUp from "../UserSignUp"
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
 import FilledInput from '@mui/material/FilledInput'

@@ -5,8 +5,6 @@ import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
-import Rest2 from './Rest2'
-import lilHouse from './images/lilHouse.png'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 function Restaurants({ locallyStoredVenues, venues, user }) {

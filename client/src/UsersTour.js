@@ -1,19 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import MapContainer from './MapContainer'
 import NewShowForm from './NewShowForm'
-import CircularProgress from '@mui/material/CircularProgress'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid';
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
 
 
-function UsersTour({editShow, deleteShow, user, setShows, setUser, venues, tours, cities, updateCities, updateShows, updateVenues, setUpdateUser, }) {
+function UsersTour({editShow, deleteShow, user, venues, updateCities, updateShows, updateVenues, setUpdateUser, }) {
+   
     const [toggle, setToggle] = useState(false)
-    // if (user === null){
-    //     return(<CircularProgress />)
-    // }
-    console.log(user.shows)
-
 
     let shows = user.shows
     // let cities = tours.cities
@@ -65,7 +60,6 @@ function UsersTour({editShow, deleteShow, user, setShows, setUser, venues, tours
     function showEditShowForm(){
         setToggle(!toggle)
     }
-    
     
     return (
         <div id="userTourDiv" class="showInfo">

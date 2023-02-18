@@ -1,25 +1,17 @@
 import { React, useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import VenueReviews from "./VenueReviews"
-import SiteHeader from './SiteHeader'
+import SiteHeader from './Header_NavBar/SiteHeader'
 import Home from "./Home"
-import LogIn from "./LogIn"
-import LogOut from "./LogOut"
-import NewShowForm from "./NewShowForm"
+import LogIn from "./LogIn_Out/LogIn"
 import UsersTour from "./UsersTour"
 import MapContainer from "./MapContainer"
 import Restaurants from "./Restaurants"
+
 import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
 import './App.css'
-import Rest2 from './Rest2'
 import background from './images/background.jpg'
-
-// import VenueReviewForm from "./VenueReviewForm"
-
-
-
-// export const UserContext = React.createContext()
 
 function App() {
   const [user, setUser] = useState(null)
@@ -32,14 +24,9 @@ function App() {
   const [shows, setShows] = useState([])
   const [updateUser, _setUpdateUser] = useState(false)
   
-  
+
   let history = useHistory();
 
-  // useEffect(() => {
-  //   fetch("/nearby")
-  //   .then((res)=> res.json())
-  //   .then((coords) => console.log(coords))
-  // }, [])
   function setUpdateUser(){
     _setUpdateUser(previousState => !previousState)
   }
@@ -60,8 +47,6 @@ function App() {
     })
     }, [updateUser]);
 
-  let userVar = user
-  // console.log(user.shows)
   useEffect(()=> {
     setLoading(true);
     fetch("/reviews")
@@ -202,10 +187,6 @@ function App() {
           <Route path="/exp">
             <MaterialUi/>
           </Route>
-          <Route path="/rest2">
-            <Rest2 />
-          </Route>
-
         </Switch>
     </Container >
   )
