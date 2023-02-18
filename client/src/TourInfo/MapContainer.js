@@ -19,7 +19,7 @@ function MapContainer({user, venues}){
       lat: 39.8283, lng: -98.5795
     }
 
-    user.shows.map((show)=> console.log(show.venue_coordinates))
+    // user.shows.map((show)=> console.log(show.venue_coordinates))
     
     function handleCloseClick(){
       setSelectedShow(null)
@@ -54,8 +54,6 @@ function MapContainer({user, venues}){
                 </InfoWindow>
             </div>
           }
-          
-          
         </GoogleMap>
       </LoadScript>
   )

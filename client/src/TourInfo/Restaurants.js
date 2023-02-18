@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 // import Geocode from 'react-geocode';
 import CircularProgress from '@mui/material/CircularProgress';
-import MaterialUi from "./MaterialUi";
+import MaterialUi from "../MaterialUi";
 import Container from "@mui/material/Container"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
-import Rest2 from './Rest2'
-import lilHouse from './images/lilHouse.png'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 function Restaurants({ locallyStoredVenues, venues, user }) {
@@ -20,7 +18,7 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
   const [selectedRestaurant,setSelectedRestaurant] = useState(null)
   
   
-  console.log(user.venues)
+
 
   useEffect(() =>{
     setTimeout(()=>{
@@ -144,8 +142,8 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
         onChange={(e) => handleSelectedVenue(e)}
       >
         <MenuItem value="">---Select A Venue Below---</MenuItem>
-        {user.venues.map((venue) => (
-          <MenuItem key={venue.id} value={venue.id}>{venue.name}</MenuItem>
+        {user.shows.map((show) => (
+          <MenuItem key={show.id} value={show.id}>{show.city_name}</MenuItem>
         ))}
       </Select>
       <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
@@ -179,8 +177,8 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
     onChange={(e) => handleSelectedVenue(e)}
   >
     <MenuItem value="">---Select A Venue Below---</MenuItem>
-    {user.venues.map((venue) => (
-      <MenuItem key={venue.id} value={venue.id}>{venue.name}</MenuItem>
+    {user.shows.map((venue) => (
+      <MenuItem key={venue.id} value={venue.id}>{user.shows.city_name}</MenuItem>
     ))}
   </Select>
   <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>

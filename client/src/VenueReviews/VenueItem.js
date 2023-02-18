@@ -10,9 +10,8 @@ const [formMerch,setFormMerch] = useState("")
 const [formComments,setFormComments] = useState("")
 
     let reviews = venue.reviews
-    // console.log(reviews)
+    console.log(reviews)
     var cardStyle = {
-        
         width: '30vw',
         transitionDuration: '0.3s',
         height: 'auto',
@@ -23,23 +22,23 @@ const [formComments,setFormComments] = useState("")
         setShowEditForm(!showEditForm)
     }
 
-    // function updateReview(e){
-    //     fetch(`/reviews/${e.id}`, {
-    //         method: 'PATCH',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             'Accept': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             greenroom_rating: formGreenRoom,
-    //             sound_engineer_rating: formSoundEngineer,
-    //             merch_cut: formMerch,
-    //             comments: formComments,
-    //             venue_id: review.venue_id,
-    //             user_id: user.id,
-    //         })
-    //     })
-    //     } }
+    function updateReview(e){
+        fetch(`/reviews/${e.id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                greenroom_rating: formGreenRoom,
+                sound_engineer_rating: formSoundEngineer,
+                merch_cut: formMerch,
+                comments: formComments,
+                venue_id: venue.id,
+                user_id: user.id,
+            })
+        })
+        } 
 
     
     
@@ -55,7 +54,7 @@ return(
                 <h4 class='venueReviewInfo'>Sound Engineer Rating: {review.sound_engineer_rating}/5</h4>
                 <h4 class='venueReviewInfo'>Merch Cut: {review.merch_cut}%</h4>
                 <h4 class='venueReviewInfo'>Additional Comments: {review.comments}</h4>
-                {/* {user.id === review.user_id  ? <button onClick={toggleEditForm}>edit</button> : <></>}
+                {user.id === review.user_id  ? <button onClick={toggleEditForm}>edit</button> : <></>}
                 {showEditForm ? 
                 <div>
                     <form onSubmit={updateReview}>
@@ -90,7 +89,7 @@ return(
                         <input type="submit"/>
                     </form>
                 </div> 
-                : <></>} */}
+                : <></>}
             </Card>
             )}
         </div> :

@@ -1,17 +1,4 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
- */
 * {
   padding: 0;
   margin: 0;
@@ -66,19 +53,11 @@ html{
 }
 
 #x {
-  animation: x 18s linear infinite alternate;
-  display:flex;
-  flex-direction: column;
+  animation: y 25s linear infinite alternate;
   margin: auto;
-  justify-content: center;
-  align-items:center;
-  text-align: center; 
-}
-
-#y:hover{
-  transform: scale(1.2) slow;
-  animation-play-state:paused;
-  cursor: pointer;
+  display:flex;
+  align-items: center;
+  padding: -10px;
 }
 
 #xTwo {
@@ -96,10 +75,13 @@ html{
 }
 
 #y {
-  animation: y 25s linear infinite alternate;
-  margin: auto;
+  animation: x 18s linear infinite alternate;
   display:flex;
-  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items:center;
+  text-align: center; 
 }
 
 #yTwo {
@@ -220,16 +202,6 @@ html{
   text-align: center;
 }
 
-/* #buttonTwo {
-  height: 200px;
-  padding: 15px;
-}
-
-#buttonThree {
-  height: 200px;
-  padding: 15px;
-} */
-
 .buttonCaptions{
   color: rgb(0, 0, 0);
   background-color: antiquewhite;
@@ -272,19 +244,8 @@ html{
 
 #formButton{
   display: flex;
-  /* text-align: center;
-  align-self: center;
-  align-items: center;
-  justify-content: center; */
   margin:auto;
 }
- /* #siteTitle {
-  color: rgb(188, 240, 188);
-  text-align: center;
-  font-size: 80px;
-  padding: 0px;
-  margin: 0px;
-} */
 
 #siteSubtitle {
   color: rgb(188, 240, 188);
@@ -308,7 +269,6 @@ html{
   justify-content: center;
   align-items: center;
 }
-
 
 #loginDiv {
   display: flex;
@@ -386,7 +346,7 @@ html{
 
 #submitLoginButton {
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 #filledButton{

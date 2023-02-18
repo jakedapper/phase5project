@@ -7,8 +7,6 @@ let infowindow;
 let service;
 
 function MaterialUi() {
-    
-
 
     const options = {
         method: 'GET',
