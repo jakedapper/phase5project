@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOut from '../LogIn_Out/LogOut'
+import LogOut from '../Users/LogOut'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid';
 import NavBar from './NavBar'

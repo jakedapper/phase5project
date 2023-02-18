@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 // import Geocode from 'react-geocode';
 import CircularProgress from '@mui/material/CircularProgress';
-import MaterialUi from "./MaterialUi";
+import MaterialUi from "../MaterialUi";
 import Container from "@mui/material/Container"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"

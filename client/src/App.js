@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import VenueReviews from "./VenueReviews"
+import VenueReviews from "./VenueReviews/VenueReviews"
 import SiteHeader from './Header_NavBar/SiteHeader'
 import Home from "./Home"
-import LogIn from "./LogIn_Out/LogIn"
-import UsersTour from "./UsersTour"
-import MapContainer from "./MapContainer"
-import Restaurants from "./Restaurants"
+import LogIn from "./Users/LogIn"
+import UsersTour from "./TourInfo/UsersTour"
+import MapContainer from "./TourInfo/MapContainer"
+import Restaurants from "./TourInfo/Restaurants"
 
 import MaterialUi from "./MaterialUi";
 import Container from "@mui/material/Container"
