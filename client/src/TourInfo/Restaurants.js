@@ -132,8 +132,8 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
 // );
 
   // add this conditional to return:  && fetchResults.length !== 0
-  return fetchResults.length > 0 ? (
-    
+  return fetchResults.length < 0 ? 
+  (
     <Container id="restaurantMapsContainer" maxWidth="sm">
       <Select
         id="venueSelector"
@@ -141,10 +141,11 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
         value={selectedVenueId}
         onChange={(e) => handleSelectedVenue(e)}
       >
-        <MenuItem value="">---Select A Venue Below---</MenuItem>
+        <MenuItem class="venue-menu-item" value="">---Select A Venue Below---</MenuItem>
         {user.shows.map((show) => (
-          <MenuItem key={show.id} value={show.id}>{show.city_name}</MenuItem>
-        ))}
+          <MenuItem class="venue-menu-item" key={show.id} value={show.id}>{show.city_name}</MenuItem>
+          )
+        )}
       </Select>
       <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
         <GoogleMap
@@ -169,31 +170,33 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
       </LoadScript>
     </Container>
   ) :
-  (<Container maxWidth="sm">
-  <Select
-    id="venueSelector"
-    variant="filled"
-    value={selectedVenueId}
-    onChange={(e) => handleSelectedVenue(e)}
-  >
-    <MenuItem value="">---Select A Venue Below---</MenuItem>
-    {user.shows.map((venue) => (
-      <MenuItem key={venue.id} value={venue.id}>{user.shows.city_name}</MenuItem>
-    ))}
-  </Select>
-  <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
-    <GoogleMap
-      mapContainerStyle={mapStyles}
-      zoom={4}
-      center={{
-        "lat": 39.8283,
-        "lng": -98.5795
-        }}
-      onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
+  (
+    <Container maxWidth="sm">
+    <Select
+      id="venueSelector"
+      variant="filled"
+      value={selectedVenueId}
+      onChange={(e) => handleSelectedVenue(e)}
     >
-    </GoogleMap>
-  </LoadScript>
-</Container>)
+      <MenuItem class="venue-menu-item" value="">---Select A Venue Below---</MenuItem>
+      {user.shows.map((venue) => (
+        <MenuItem key={venue.id} value={venue.id}>{user.shows.city_name}</MenuItem>
+      ))}
+    </Select>
+    <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
+      <GoogleMap
+        mapContainerStyle={mapStyles}
+        zoom={4}
+        center={{
+          "lat": 39.8283,
+          "lng": -98.5795
+          }}
+        onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
+      >
+      </GoogleMap>
+    </LoadScript>
+  </Container>
+)
   
 }
 
