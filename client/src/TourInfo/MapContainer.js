@@ -45,7 +45,7 @@ function MapContainer({user, venues}){
             <div>
                 <InfoWindow value={selectedShow.id} key={selectedShow.id} onCloseClick={handleCloseClick} position={selectedShow.venue_coordinates}>
                   <div>
-                    <h2>{selectedShow.city_name}</h2>
+                    <h3>{selectedShow.city_name}</h3>
                     <h2>{selectedShow.date}</h2>
                     <h2>Doors: {selectedShow.doors_time}</h2>
                     <h2>SoundCheck: {selectedShow.soundcheck_time}</h2>
