@@ -10,7 +10,7 @@ const [formMerch,setFormMerch] = useState("")
 const [formComments,setFormComments] = useState("")
 
     let reviews = venue.reviews
-    console.log(reviews)
+    console.log("reviews: ", reviews)
     var cardStyle = {
         width: '30vw',
         transitionDuration: '0.3s',
@@ -24,12 +24,11 @@ const [formComments,setFormComments] = useState("")
     }
 
     function updateReview(e){
-        
+        e.preventDefault();
         fetch(`/reviews/${e.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
-                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 greenroom_rating: formGreenRoom,
@@ -39,8 +38,10 @@ const [formComments,setFormComments] = useState("")
                 venue_id: venue.id,
                 user_id: user.id,
             })
+            
         })
-        } 
+        .then((res) => res.json())
+     } 
 
     
     
@@ -57,7 +58,7 @@ return(
                 <h4 class='venueReviewInfo'>Merch Cut: {review.merch_cut}%</h4>
                 <h4 class='venueReviewInfo'>Additional Comments: {review.comments}</h4>
                 {user.id === review.user_id  ? <button onClick={toggleEditForm}>edit</button> : <></>}
-                {showEditForm ? 
+                {showEditForm && user.id === review.user_id ? 
                 <div>
                     <form onSubmit={updateReview}>
                         <input
