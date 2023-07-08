@@ -1,5 +1,11 @@
 import { React, useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
+
+import MaterialUi from "./MaterialUi";
+import Container from "@mui/material/Container"
+import './App.css'
+import background from './images/background.jpg'
+
 import VenueReviews from "./VenueReviews/VenueReviews"
 import SiteHeader from './Header_NavBar/SiteHeader'
 import Home from "./Home"
@@ -8,10 +14,6 @@ import UsersTour from "./TourInfo/UsersTour"
 import MapContainer from "./TourInfo/MapContainer"
 import Restaurants from "./TourInfo/Restaurants"
 
-import MaterialUi from "./MaterialUi";
-import Container from "@mui/material/Container"
-import './App.css'
-import background from './images/background.jpg'
 
 function App() {
   const [user, setUser] = useState(null)

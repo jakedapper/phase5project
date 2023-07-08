@@ -17,7 +17,7 @@ function SiteHeader({navToHome, handleLogOut}){
             <Grid id="gridHeader">
                 <Container maxwidth='lg'>
                     <h2 id="siteTitle">Virtual Tour Manager 1.0</h2>
-                    <h3 id="siteSubtitle">Not like replacing the person who has the position of the same name but like a way for you to organize important tour information or whatever.</h3>
+                    <h3 id="siteSubtitle">A way for you to organize important tour information</h3>
                 </Container>   
                 <Container>
                     
