@@ -31,11 +31,11 @@ function VenueReviews({user, venues, addNewReview}) {
         return(<CircularProgress />)
       }
 
-        if (displayForm === false){
-            setDisplayForm(true)
-        }else {
-            setDisplayForm(false)
-      }
+      if (displayForm === false){
+          setDisplayForm(true)
+      }else {
+          setDisplayForm(false)
+    }
     }
  
 
@@ -44,7 +44,7 @@ function VenueReviews({user, venues, addNewReview}) {
         <div id='reviewDiv'>
             {venues.map((venue) => <VenueItem user={user} key={venue.id} venue={venue}/>)}
         </div>
-            <Button id="formButton" variant="contained" onClick={handleFormShowClick}>Leave A Review?</Button>
+            <button id="formButton" variant="contained" onClick={handleFormShowClick}>Leave A Review?</button>
             {displayForm ? <VenueReviewForm id="reviewForm" addNewReview={addNewReview} user={user} venues={venues}/> : <div></div>}
       </div>
     )

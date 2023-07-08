@@ -1,24 +1,53 @@
-# README
+# Virtual Tour Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A place for bands to plan tours and write/read reviews for venues along the way.
 
-Things you may want to cover:
+## User Features
 
-* Ruby version
+## The user (band) can:
 
-* System dependencies
+- Submit one review of a venue on their tour
+- Read other bands' reviews of venues
+- See a map of markers and list for each of the shows on their tour
+- Add or delete shows on their tour
+- Select a venue and see nearby restaurants displayed on a map
 
-* Configuration
+## Set Up
 
-* Database creation
+Clone or fork this repository:
 
-* Database initialization
+```
+git clone https://github.com/jakedapper/phase5project.git
+```
 
-* How to run the test suite
+Seed the data:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rails db:seed
+```
 
-* Deployment instructions
+Run the server:
 
-* ...
+```
+rails s
+```
+
+Open another terminal window. Navigate to the client folder:
+
+```
+cd client
+```
+
+Install Requirements
+
+```
+npm install
+```
+
+Open app in browser:
+
+```
+npm start
+```
+
+Demo

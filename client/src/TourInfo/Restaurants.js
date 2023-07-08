@@ -7,9 +7,7 @@ import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
-function Restaurants({ locallyStoredVenues, venues, user }) {
-  
-  // console.log(locallyStoredVenues[0].coordinates)
+function Restaurants({venues, user }) {
  
   const [selectedVenueId, setSelectedVenueId] = useState("");
   const [selectedVenue, setSelectedVenue] = useState({})
@@ -17,83 +15,36 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
   const [fetchResults, setFetchResults]= useState([])
   const [selectedRestaurant,setSelectedRestaurant] = useState(null)
   
-  
-
-
   useEffect(() =>{
     setTimeout(()=>{
     let myVenue = venues.find(({id}) => id == selectedVenueId)
-    console.log(myVenue)
     if(selectedVenue !== {}){
     setSelectedVenue(myVenue)
     }}, 2000)
-    // setToggleCoords(!toggleCoords)
   },[selectedVenueId])
-
-  // useEffect(()=>{
-  //   console.log("okokokok")
-  // },[toggleCoords])
-  let results = []
-  
-  //turn into async await function
-    // map over results and push coordinates into array or set to a state
-    //OR
-    // map over and create Makers for each? would prefer to do this is JSX - have a saved data object to map
-    // (cont) over and create a marker like in map Container
-    // -- could set return condition to include this marker data state as well 
-  
-    //state of selected venue is not set quick enough even though
-    //(cont) its initialized as {}, JS/React see this condition and
-    //(cont) are like oh yea that's true let's run the code
-
-    // async function getRestaurants(){
-    //   // if (selectedVenue !== {}) {
-    //   setTimeout(async ()=>{
-    //   setFetchResults([])
-    //   const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             'X-RapidAPI-Key': 'b6dc7a9f11mshc3c9c80f93bb8e3p14582djsn410f8593f049',
-    //             'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-    //         }
-    //       };
-
-    //   const res = await fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=${selectedVenue.coordinates.lat}&longitude=${selectedVenue.coordinates.lng}&limit=30&currency=USD&distance=2&open_now=false&lunit=mi&lang=en_US`, options)
-    //   const results = await res.json()
-    //   console.log(results.data)
-    //   console.log("before push:", fetchResults)
-    //   fetchResults.push(results)
-    //   console.log("after push:", fetchResults)
-    // }, "3000")
-    // }else{
-    //   console.log("didnt run")
-    // }
     
 
-    function getRestaurants(){
-      setTimeout(() =>{
-      setFetchResults([])
-      
-      const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': 'b6dc7a9f11mshc3c9c80f93bb8e3p14582djsn410f8593f049',
-                'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-            }
+  function getRestaurants(){
+    setTimeout(() =>{
+    setFetchResults([])
+    
+    const options = {
+          method: 'GET',
+          headers: {
+              'X-RapidAPI-Key': 'b6dc7a9f11mshc3c9c80f93bb8e3p14582djsn410f8593f049',
+              'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
           }
-      
-      fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=${selectedVenue.coordinates.lat}&longitude=${selectedVenue.coordinates.lng}&limit=15&currency=USD&distance=2&open_now=false&lunit=mi&lang=en_US`, options)
-      .then((res)=>res.json())
-      // .then((data)=>console.log(data))
-      .then((data)=>setFetchResults(data.data))
-
-      console.log("inside function", fetchResults)
-    }, "0000")
-    }
-    console.log(fetchResults)
-
-    // // const selectedVenueExists = selectedVenue === {}
+        }
     
+    fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=${selectedVenue.coordinates.lat}&longitude=${selectedVenue.coordinates.lng}&limit=15&currency=USD&distance=2&open_now=false&lunit=mi&lang=en_US`, options)
+    .then((res)=>res.json())
+    // .then((data)=>console.log(data))
+    .then((food)=>setFetchResults(food.data))
+
+    console.log("inside function", fetchResults)
+  }, "0000")
+  }
+ 
     useEffect(()=>{
       if(selectedVenue !== undefined || {}){
       setTimeout(()=>{
@@ -126,13 +77,9 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
     width: '100%',
   };
 
-//   let iconMarker = new window.google.maps.MarkerImage(
-//     "https://lh3.googleusercontent.com/bECXZ2YW3j0yIEBVo92ECVqlnlbX9ldYNGrCe0Kr4VGPq-vJ9Xncwvl16uvosukVXPfV=w300",
-//     new window.google.maps.Size(32, 32)
-// );
+user.shows.map((show) => console.log(show.city_name))
 
-  // add this conditional to return:  && fetchResults.length !== 0
-  return fetchResults.length < 0 ? 
+  return fetchResults.length > 0 ? 
   (
     <Container id="restaurantMapsContainer" maxWidth="sm">
       <Select
@@ -179,8 +126,8 @@ function Restaurants({ locallyStoredVenues, venues, user }) {
       onChange={(e) => handleSelectedVenue(e)}
     >
       <MenuItem class="venue-menu-item" value="">---Select A Venue Below---</MenuItem>
-      {user.shows.map((venue) => (
-        <MenuItem key={venue.id} value={venue.id}>{user.shows.city_name}</MenuItem>
+      {user.shows.map((show) => (
+        <MenuItem key={show.id} value={show.id}>{show.city_name}</MenuItem>
       ))}
     </Select>
     <LoadScript googleMapsApiKey='AIzaSyBf0C3pSeGhmIl2eEuNZ6vVSsXnEYlRRmY'>
