@@ -40,8 +40,7 @@ function App() {
     .then((r) => {
       if (r.ok) {
         r.json()
-        .then((user) => {setUser(user)
-        });
+        .then((user) => {setUser(user)});
       }
     })
     .finally(() => {
@@ -113,11 +112,7 @@ function App() {
       setLoading(false)
     })
   }, [user])
- 
-  function addNewReview(newReview){
-    setReviews(...reviews, newReview)
-  }
-
+  
   function handleLogOut() {
     fetch ("/logout", 
     { method: "DELETE" })
@@ -125,41 +120,42 @@ function App() {
       history.push("/")  
     };
 
-    function updateCities(newCity){
-      setCities([...cities, newCity])
-    }
+  function addNewReview(newReview){
+    setReviews(...reviews, newReview)
+  }
 
-    function updateShows(newShow){
-      setShows([...shows, newShow])
-    }
 
-    function updateTours(newTour){
-      setTours([...tours, newTour])
-    }
+  function updateCities(newCity){
+    setCities([...cities, newCity])
+  }
 
-    function deleteShow(e){
-      console.log(e.target.id)
-      fetch(`/shows/${e.target.id}`, {
-          method: 'DELETE',
-      })
-      .then(fetch('/shows')
-              .then((res)=>res.json())
-              .then(data=>setShows(data)))
-      window.location.reload();
-      history.push('/myTour')
-      }
+  function updateShows(newShow){
+    setShows([...shows, newShow])
+  }
+
+  function updateTours(newTour){
+    setTours([...tours, newTour])
+  }
+  function updateVenues(newVenue){
+    setVenues([...venues, newVenue]) 
+  }
+
+  function deleteShow(e){
+    console.log(e.target.id)
+    fetch(`/shows/${e.target.id}`, {
+        method: 'DELETE',
+    })
+    .then(fetch('/shows')
+            .then((res)=>res.json())
+            .then(data=>setShows(data)))
+    window.location.reload();
+    history.push('/myTour')
+    }
 
   function navToHome () {
     history.push("/")
   }
 
-    let locallyStoredVenues = []
-    locallyStoredVenues = venues
-    function updateVenues(newVenue){
-      setVenues([...venues, newVenue])
-      locallyStoredVenues.push(newVenue); 
-    }
-  // console.log(locallyStoredVenues)
     
   if (user === null) return <LogIn updateTours={updateTours} user={user} setUser={setUser}/> 
     
@@ -184,7 +180,7 @@ function App() {
             <MapContainer user={user} venues={venues}/>
           </Route>
           <Route path="/restaurants">
-            <Restaurants user={user} locallyStoredVenues={locallyStoredVenues} venues={venues}/>
+            <Restaurants user={user} venues={venues}/>
           </Route>
           <Route path="/exp">
             <MaterialUi/>

@@ -19,10 +19,12 @@ const [formComments,setFormComments] = useState("")
     }
 
     function toggleEditForm(){
+        console.log("clicK")
         setShowEditForm(!showEditForm)
     }
 
     function updateReview(e){
+        
         fetch(`/reviews/${e.id}`, {
             method: 'PATCH',
             headers: {
