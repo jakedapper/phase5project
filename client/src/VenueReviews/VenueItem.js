@@ -8,6 +8,7 @@ const [formGreenRoom,setFormGreenRoom] = useState("")
 const [formSoundEngineer,setFormSoundEngineer] = useState("")
 const [formMerch,setFormMerch] = useState("")
 const [formComments,setFormComments] = useState("")
+const [selectedReview, setSelectedReview] = useState("")
 
     let reviews = venue.reviews
     console.log("reviews: ", reviews)
@@ -25,22 +26,25 @@ const [formComments,setFormComments] = useState("")
 
     function updateReview(e){
         e.preventDefault();
-        fetch(`/reviews/${e.id}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                greenroom_rating: formGreenRoom,
-                sound_engineer_rating: formSoundEngineer,
-                merch_cut: formMerch,
-                comments: formComments,
-                venue_id: venue.id,
-                user_id: user.id,
-            })
+        console.log(e.target.value)
+        // fetch(`/reviews/${e.target.value}`, {
+        //     method: 'PATCH',
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         greenroom_rating: formGreenRoom,
+        //         sound_engineer_rating: formSoundEngineer,
+        //         merch_cut: formMerch,
+        //         comments: formComments,
+        //         venue_id: venue.id,
+        //         user_id: user.id,
+        //     })
             
-        })
-        .then((res) => res.json())
+        // })
+        // .then((res) => res.json())
+
+        // write promise similar to delete show function in App - another fetch request/reset state for venues/reviews and reload page
      } 
 
     
@@ -60,7 +64,7 @@ return(
                 {user.id === review.user_id  ? <button onClick={toggleEditForm}>edit</button> : <></>}
                 {showEditForm && user.id === review.user_id ? 
                 <div>
-                    <form onSubmit={updateReview}>
+                    <form onSubmit={updateReview} value={review.user_id}>
                         <input
                             placeholder={review.greenroom_rating}
                             type="text"
